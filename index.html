@@ -2522,6 +2522,79 @@ function getHisShareText(day, personal) {
   return `${date}\n\n${personal.label}\n${personal.text}\n\n${day.primary.text}\n\n${day.alt.text}\n\nYOU MAY BE FEELING\n${insightToSecondPerson(day.insight.feeling)}\n\nWHAT YOU NEED\n${insightToSecondPerson(day.insight.needs)}\n\nWATCH FOR\n${insightToSecondPerson(day.insight.watchFor)}`;
 }
 
+function herInsightToSecondPerson(text) {
+  return text
+    .replace(/\bShe is\b/g, "You are").replace(/\bshe is\b/g, "you are")
+    .replace(/\bShe's\b/g, "You're").replace(/\bshe's\b/g, "you're")
+    .replace(/\bShe may\b/g, "You may").replace(/\bshe may\b/g, "you may")
+    .replace(/\bShe can\b/g, "You can").replace(/\bshe can\b/g, "you can")
+    .replace(/\bHer\b/g, "Your").replace(/\bher\b/g, "your")
+    .replace(/\bShe\b/g, "You").replace(/\bshe\b/g, "you");
+}
+
+function getDatingInsight(dayM, dayF, vibe) {
+  const byArchetype = {
+    sovereign: {
+      underneath: "Recognition and respect may matter more to him than reassurance today. He may want partnership without feeling managed.",
+      notAssume: "Confidence or command does not automatically mean he is emotionally unavailable; he may be carrying pressure privately.",
+      approach: "Meet him directly, acknowledge what he is carrying, and speak as an equal rather than trying to soften or steer him.",
+      opener: "What feels most important for you to handle today—and how can I stand beside you without taking it over?",
+    },
+    strategist: {
+      underneath: "His distance may be concentration. He often needs to understand the whole board before explaining the move.",
+      notAssume: "Silence is not necessarily rejection, secrecy, or loss of interest; it may mean his thoughts are not ready to be shared.",
+      approach: "Ask one clear question, give him thinking room, and avoid demanding an immediate emotional conclusion.",
+      opener: "Do you want to talk it through now, or would space to think help you come back clearer?",
+    },
+    visionary: {
+      underneath: "He may be energized by a possibility that is still difficult to explain. Belief can help more than immediate logistics.",
+      notAssume: "Being future-focused does not mean he is ignoring the relationship; his attention may be attached to something he hopes to build.",
+      approach: "Let him describe the full vision before testing the details, then help identify one realistic next step.",
+      opener: "What are you seeing that you wish someone else could see with you?",
+    },
+    builder: {
+      underneath: "Providing, fixing, and finishing may be how he expresses care. Fatigue can hide behind productivity.",
+      notAssume: "Task focus is not automatically emotional distance; work may be the language he uses when responsibility feels heavy.",
+      approach: "Offer practical support, notice his effort specifically, and invite rest without making him feel incapable.",
+      opener: "What can wait today, and what would actually help you feel supported?",
+    },
+    mystic: {
+      underneath: "He may be processing something deep that does not yet have clean language. Presence can be more useful than analysis.",
+      notAssume: "Emotional depth or withdrawal does not necessarily mean something is wrong between you.",
+      approach: "Stay warm, lower the pressure, and let him know honesty is welcome even if the thought is unfinished.",
+      opener: "Would you rather have quiet company, space, or someone to listen without trying to solve it?",
+    },
+    scholar: {
+      underneath: "He may be reviewing, questioning, or mentally correcting course. Confusion can frustrate someone accustomed to clarity.",
+      notAssume: "Second-guessing does not mean he has become unreliable or changed his feelings; he may simply need more information.",
+      approach: "Keep the conversation precise and low-pressure. Treat review as intelligence rather than delay.",
+      opener: "What part feels unclear, and would it help to look at it together without deciding yet?",
+    },
+    devoted: {
+      underneath: "His care may show through consistency, protection, or quiet acts rather than a dramatic emotional display.",
+      notAssume: "A calm or practical expression of love is not lesser affection; loyalty may be the clearest thing he is communicating.",
+      approach: "Notice what he does, respond with genuine appreciation, and make room for him to receive care too.",
+      opener: "I see how consistently you show up—what would make you feel cared for today?",
+    },
+  };
+  const d = byArchetype[dayM.archKey] || byArchetype.visionary;
+  const datingEnergy = vibe.score >= 4
+    ? "The connection is naturally supportive today. Use the ease for closeness, shared plans, or an honest conversation without forcing intensity."
+    : vibe.score === 3
+      ? "The connection can work well with clear expectations. Aim for cooperation rather than expecting identical moods or timing."
+      : "Different needs may create friction today. Choose patience, lower pressure, and postpone major conclusions until both of you feel settled.";
+  return {
+    showing: dayM.insight.feeling,
+    underneath: d.underneath,
+    need: dayM.insight.needs,
+    notAssume: d.notAssume,
+    approach: d.approach,
+    opener: d.opener,
+    datingEnergy,
+    grounding: `Keep your own needs visible too. ${herInsightToSecondPerson(dayF.insight.needs)}`,
+  };
+}
+
 function getArchetype(profile, lunar, element, mayan, astroEvent, venusDay, saturnDay) {
   const t = astroEvent?.type;
   if (profile === "M") {
@@ -3220,9 +3293,12 @@ function App() {
         const dayF = DAYS_F[selected];
         const vibe = getVibe(dayM, dayF);
         const dailyGuidance = getDailyTogetherGuidance(dayM, dayF, vibe, selected);
+        const dating = getDatingInsight(dayM, dayF, vibe);
         const stars = [1,2,3,4,5].map(n => n <= vibe.score ? vibe.color : "rgba(237,229,216,0.12)");
         const copyKey = `together-${selected}`;
+        const datingCopyKey = `dating-${selected}`;
         const togetherText = `${dayM.primary.text}\n\n${dayF.primary.text}\n\n${dailyGuidance}`;
+        const datingText = `UNDERSTANDING HIM TODAY\n\nHOW HE MAY BE SHOWING UP\n${dating.showing}\n\nWHAT MAY BE UNDERNEATH IT\n${dating.underneath}\n\nWHAT HE MAY NEED FROM YOU\n${dating.need}\n\nWHAT NOT TO ASSUME\n${dating.notAssume}\n\nHOW TO APPROACH HIM\n${dating.approach}\n\nCONVERSATION OPENER\n“${dating.opener}”\n\nDATING ENERGY TODAY\n${dating.datingEnergy}\n\nYOUR GROUNDING REMINDER\n${dating.grounding}`;
         return (
           <div style={{ padding: "14px 12px 80px" }}>
             {/* Date header */}
@@ -3292,6 +3368,32 @@ function App() {
             <div style={{ display: "flex", justifyContent: "space-between", marginTop: "14px" }}>
               <button onClick={() => nav(-1)} disabled={selected===0} style={{ padding: "8px 18px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(237,229,216,0.4)", borderRadius: "6px", fontSize: "11px", cursor: "pointer" }}>← Prev</button>
               <button onClick={() => nav(1)}  disabled={selected===364} style={{ padding: "8px 18px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(237,229,216,0.4)", borderRadius: "6px", fontSize: "11px", cursor: "pointer" }}>Next →</button>
+            </div>
+
+            {/* Dating insight for her about him */}
+            <div style={{ background: "rgba(212,168,67,0.07)", border: "1px solid rgba(212,168,67,0.3)", borderRadius: "12px", padding: "14px", marginTop: "14px" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "10px", marginBottom: "12px" }}>
+                <div style={{ fontSize: "9px", letterSpacing: "2px", textTransform: "uppercase", color: "rgba(212,168,67,0.9)" }}>💛 Understanding Him Today</div>
+                <button onClick={() => copy(datingText, datingCopyKey)} style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(212,168,67,0.35)", color: copied === datingCopyKey ? "#D4A843" : "rgba(237,229,216,0.46)", fontSize: "9px", padding: "5px 8px", borderRadius: "4px", cursor: "pointer" }}>{copied === datingCopyKey ? "✓ COPIED" : "COPY"}</button>
+              </div>
+              {[
+                ["How He May Be Showing Up", "🧭", dating.showing],
+                ["What May Be Underneath It", "🌊", dating.underneath],
+                ["What He May Need From You", "🌱", dating.need],
+                ["What Not to Assume", "🕊️", dating.notAssume],
+                ["How to Approach Him", "🤝", dating.approach],
+                ["Conversation Opener", "💬", `“${dating.opener}”`],
+                ["Dating Energy Today", "💞", dating.datingEnergy],
+                ["Your Grounding Reminder", "⚓", dating.grounding],
+              ].map(([label, icon, text]) => (
+                <div key={label} style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "9px", marginTop: "9px" }}>
+                  <div style={{ fontSize: "8px", letterSpacing: "1.5px", textTransform: "uppercase", color: "rgba(212,168,67,0.67)", marginBottom: "4px" }}>{icon} {label}</div>
+                  <div style={{ fontSize: "12px", lineHeight: "1.68", color: "rgba(237,229,216,0.7)" }}>{text}</div>
+                </div>
+              ))}
+              <div style={{ fontSize: "9px", color: "rgba(237,229,216,0.28)", fontStyle: "italic", lineHeight: "1.5", borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "9px", marginTop: "10px" }}>
+                Reflective dating guidance—not proof of exactly what he is thinking or feeling.
+              </div>
             </div>
           </div>
         );
