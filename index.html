@@ -2362,6 +2362,67 @@ function getHerPersonalEnergy(day, dayIndex) {
   };
 }
 
+function getHerDeeperReading(day, dayIndex) {
+  const direct = day.tone === "direct";
+  const mind = [
+    "Your Aquarius mind is working ahead of the present moment. Capture the idea before practical concerns make it smaller.",
+    "You are seeing patterns other people may not recognize yet. Give the insight language, then decide what actually needs action.",
+    "Your intelligence wants an honest problem to solve today. Choose the question that creates possibility rather than more noise.",
+    "Mental independence is one of your strengths, but the right sounding board can help your best idea become clearer without controlling it.",
+    "Your perspective is original because you are willing to question what everyone else treats as settled. Trust that instinct thoughtfully.",
+    "The future is pulling at your attention. Handle one present responsibility, then make room for the vision that keeps returning.",
+    "You may be less interested in small talk and more interested in meaning today. Seek the conversation that gives your mind somewhere real to go.",
+    "Clarity arrives when you stop translating your thoughts for people committed to misunderstanding them. State the truth simply.",
+  ];
+  const emotionalDirect = [
+    "Your Sagittarius Moon is asking for movement, honesty, and emotional room. Excitement may be the feeling underneath your restlessness.",
+    "Your emotional energy is expansive today. Let enthusiasm guide you without promising more than your Capricorn rising can realistically carry.",
+    "You may feel ready to outgrow a limit that once kept you safe. Honor the growth while choosing the next step deliberately.",
+    "Truth feels emotionally cleansing today. Say what is real with warmth, then allow the conversation to breathe.",
+  ];
+  const emotionalNurture = [
+    "Your Sagittarius Moon may need distance from pressure before it can recognize what it truly feels. Space is part of your processing.",
+    "Restlessness may be covering disappointment or fatigue. Give yourself quiet before deciding that everything needs to change.",
+    "You may want freedom more than advice today. Choose one small way to create breathing room without abandoning what matters.",
+    "Big feelings do not always need a big decision. Let the emotional weather move before choosing a permanent direction.",
+  ];
+  const love = [
+    "Aquarius Venus needs connection that includes friendship, intellectual honesty, and freedom. The right closeness does not require self-erasure.",
+    "You receive love through being understood accurately. Ask for attentive presence instead of hoping someone interprets your independence correctly.",
+    "Your heart opens when conversation feels alive and neither person has to perform a role. Choose authenticity over forced harmony.",
+    "You can need both closeness and space. Naming which one you need today prevents distance from being mistaken for rejection.",
+    "Respect is romantic to you. Notice who values your ideas, honors your autonomy, and remains steady when you are fully yourself.",
+    "Your love is loyal without being possessive. Give where there is reciprocity and let mutual freedom strengthen the bond.",
+    "Being seen is different from being watched. Move toward the people who recognize your inner world, not only your visible strength.",
+    "You do not have to make your needs more conventional to make them valid. Honest connection begins with accurate self-expression.",
+  ];
+  const practice = direct ? [
+    "Write down the idea, choose the first measurable step, and give it twenty focused minutes.",
+    "Have the direct conversation while your clarity is available, but leave room for the other person’s truth too.",
+    "Move your body, change your environment, and let physical momentum support mental momentum.",
+    "Choose one boundary that protects the future you are trying to build and communicate it calmly.",
+    "Do one visible thing that reflects the woman you are becoming rather than the role you have outgrown.",
+    "Turn inspiration into structure: name the goal, the next action, and what can wait.",
+    "Let yourself be celebrated without redirecting the attention or minimizing the accomplishment.",
+    "Follow curiosity for one hour without requiring it to become productive immediately.",
+  ] : [
+    "Reduce the number of decisions you need to make and let simplicity restore your nervous system.",
+    "Create a quiet hour with no problem-solving, no performance, and no obligation to explain how you feel.",
+    "Ask someone trustworthy for one specific form of support and practice receiving it without repayment.",
+    "Choose warmth, nourishment, water, and rest before interpreting fatigue as a life-direction problem.",
+    "Put one expectation down for the day and notice how much energy returns when perfection is no longer required.",
+    "Take space without disappearing: tell the people who matter that you are restoring, not withdrawing from them.",
+    "Return to a familiar ritual that makes your body feel safe enough for your mind to soften.",
+    "Delay the major conclusion and give yourself permission to know less for twenty-four hours.",
+  ];
+  return {
+    mind: mind[dayIndex % mind.length],
+    emotional: (direct ? emotionalDirect : emotionalNurture)[Math.floor(dayIndex / 2) % 4],
+    love: love[Math.floor(dayIndex / 3) % love.length],
+    practice: practice[Math.floor(dayIndex / 5) % practice.length],
+  };
+}
+
 // His personal companion message uses the verified details available in his
 // standalone file (January 21, Aquarius) and does not invent missing placements.
 function getHisPersonalEnergy(day, dayIndex) {
@@ -3055,6 +3116,28 @@ function App() {
                 <div style={{ borderTop: `1px solid ${personal.color}25`, marginTop: "11px", paddingTop: "8px", fontSize: "9px", lineHeight: "1.55", color: "rgba(237,229,216,0.35)" }}>
                   Aquarius Sun · Sagittarius Moon · Capricorn Rising · Aquarius Venus · Saturn chart ruler · Born 5:22 a.m.
                 </div>
+              </div>
+            );
+          })()}
+
+          {/* Additional daily depth for her — kept separate from copy/share content */}
+          {profile === "F" && (() => {
+            const reading = getHerDeeperReading(cur, selected);
+            const sections = [
+              ["Mind & Direction", "💡", reading.mind],
+              ["Emotional Weather", "🌙", reading.emotional],
+              ["Love & Connection", "💞", reading.love],
+              ["Grounding Practice", "🌿", reading.practice],
+            ];
+            return (
+              <div style={{ background: "rgba(155,126,200,0.07)", border: "1px solid rgba(155,126,200,0.32)", borderRadius: "10px", padding: "14px", marginBottom: "10px" }}>
+                <div style={{ fontSize: "9px", letterSpacing: "3px", textTransform: "uppercase", color: "rgba(212,160,192,0.85)", marginBottom: "12px" }}>🔮 Deeper Reading for Her</div>
+                {sections.map(([label, icon, text]) => (
+                  <div key={label} style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "10px", marginTop: "10px" }}>
+                    <div style={{ fontSize: "9px", letterSpacing: "1.5px", textTransform: "uppercase", color: "rgba(212,160,192,0.72)", marginBottom: "5px" }}>{icon} {label}</div>
+                    <div style={{ fontSize: "12px", lineHeight: "1.72", color: "rgba(237,229,216,0.72)" }}>{text}</div>
+                  </div>
+                ))}
               </div>
             );
           })()}
