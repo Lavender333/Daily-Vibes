@@ -3007,29 +3007,6 @@ function App() {
             ))}
           </div>
 
-          {/* His personal Direct/Nurture companion */}
-          {profile === "M" && (() => {
-            const personal = getHisPersonalEnergy(cur, selected);
-            const personalCopyKey = `his-personal-${selected}`;
-            return (
-              <div style={{ background: `${personal.color}12`, border: `1px solid ${personal.color}45`, borderRadius: "10px", padding: "14px", marginBottom: "10px" }}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "10px", marginBottom: "9px" }}>
-                  <div>
-                    <div style={{ fontSize: "8px", letterSpacing: "3px", textTransform: "uppercase", color: `${personal.color}aa`, marginBottom: "3px" }}>His Personal Energy</div>
-                    <div style={{ fontSize: "12px", color: personal.color, fontWeight: "bold" }}>{personal.label}</div>
-                  </div>
-                  <button onClick={() => copy(personal.text, personalCopyKey)} style={{ background: "rgba(255,255,255,0.06)", border: `1px solid ${personal.color}35`, color: copied === personalCopyKey ? personal.color : "rgba(237,229,216,0.42)", fontSize: "9px", padding: "4px 8px", borderRadius: "4px", cursor: "pointer" }}>
-                    {copied === personalCopyKey ? "✓" : "COPY"}
-                  </button>
-                </div>
-                <p style={{ fontSize: "14px", lineHeight: "1.82", margin: 0, color: "#f0e8d8" }}>{personal.text}</p>
-                <div style={{ borderTop: `1px solid ${personal.color}25`, marginTop: "11px", paddingTop: "8px", fontSize: "9px", lineHeight: "1.55", color: "rgba(237,229,216,0.35)" }}>
-                  January 21, 1984 · Aquarius Sun · Life Path 8 · Water Pig · Vision · Leadership · Discipline · Loyalty
-                </div>
-              </div>
-            );
-          })()}
-
           {/* Complete second-person message for copying and sharing with him */}
           {profile === "M" && (() => {
             const personal = getHisPersonalEnergy(cur, selected);
@@ -3083,7 +3060,7 @@ function App() {
           })()}
 
           {/* Affirmation Cards */}
-          {[
+          {profile !== "M" && [
             { label: `Send This · ${cur.archData.icon} ${cur.archData.label}`, voiceColor: cur.archData.color, data: cur.primary, favKey: `primary-${selected}`, jokeKey: `j1-${selected}`, idx: 0 },
             { label: `Alt Voice · ${cur.altArch.icon} ${cur.altArch.label}`, voiceColor: cur.altArch.color, data: cur.alt, favKey: `alt-${selected}`, jokeKey: `j2-${selected}`, idx: 1 },
           ].map(({ label, voiceColor, data, favKey, jokeKey, idx }) => (
