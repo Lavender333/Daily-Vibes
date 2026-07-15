@@ -2595,6 +2595,69 @@ function getDatingInsight(dayM, dayF, vibe) {
   };
 }
 
+function getHerDatingInsight(dayM, dayF, vibe) {
+  const byArchetype = {
+    fierce_mother: {
+      underneath: "Her intensity may be protective rather than combative. She is often strongest where something important feels exposed or unsupported.",
+      notAssume: "Directness does not automatically mean rejection or anger at you; she may be defending a standard, a boundary, or someone she loves.",
+      approach: "Meet her honestly and without shrinking. Respect the strength first, then ask what it is trying to protect.",
+      opener: "What feels important enough that you need me fully beside you right now?",
+    },
+    soft_mother: {
+      underneath: "She may be depleted from caring, organizing, or holding more than she has named. Softness is a need, not a loss of strength.",
+      notAssume: "Quietness or lower energy does not mean she has lost interest; she may need to receive instead of lead for a while.",
+      approach: "Offer specific practical care without making her manage the help. Keep the atmosphere gentle and expectations light.",
+      opener: "What can I take off your plate today without you having to organize it for me?",
+    },
+    inner_child: {
+      underneath: "Her need for freedom, play, or spontaneity may be her nervous system asking for relief from responsibility.",
+      notAssume: "A change of mood or desire for space is not automatically instability or avoidance; she may be trying to feel like herself again.",
+      approach: "Invite lightness without forcing it. Give her room to choose something enjoyable that has no performance attached.",
+      opener: "What would feel freeing or genuinely fun for you today?",
+    },
+    wise_crone: {
+      underneath: "She may already sense the truth of a situation and be waiting for enough quiet to trust what she knows.",
+      notAssume: "Her reserve is not necessarily emotional distance; discernment often makes her observe before she speaks.",
+      approach: "Do not rush her conclusion. Ask for her honest read and show that you can receive it without becoming defensive.",
+      opener: "What are you noticing that has not been said out loud yet?",
+    },
+    cosmic_mentor: {
+      underneath: "She may be thinking beyond the immediate problem toward meaning, growth, and what the experience is trying to teach.",
+      notAssume: "Big-picture thinking does not mean she is dismissing the present; it may be how she makes the present bearable and useful.",
+      approach: "Engage her mind and let her share the full perspective before narrowing the conversation to logistics.",
+      opener: "What do you think this moment is showing us about where we are going?",
+    },
+    muse: {
+      underneath: "She may want to feel delighted in, chosen, and appreciated as a woman—not only respected for what she handles.",
+      notAssume: "Wanting attention or romance is not superficial; being genuinely seen can be a core form of emotional connection for her.",
+      approach: "Be specific with affection. Notice something real about her presence, beauty, creativity, or the feeling she brings into your life.",
+      opener: "Can I tell you something specific I have been appreciating about you lately?",
+    },
+    priestess: {
+      underneath: "She may be especially sensitive to inconsistency, imbalance, or what remains unspoken between you.",
+      notAssume: "Her boundaries are not punishment, and her sensitivity is not necessarily overreaction; she may be detecting a mismatch that needs honesty.",
+      approach: "Be clear, consistent, and truthful. Avoid half-answers, and give her room to feel before asking for resolution.",
+      opener: "What would make this feel more honest, balanced, and safe for you?",
+    },
+  };
+  const d = byArchetype[dayF.archKey] || byArchetype.cosmic_mentor;
+  const datingEnergy = vibe.score >= 4
+    ? "The relationship energy supports closeness and mutual understanding today. Appreciation and honest conversation can land especially well."
+    : vibe.score === 3
+      ? "You may be moving at different emotional speeds. Stay curious, clarify expectations, and do not make difference mean disconnection."
+      : "Sensitivity or mismatched needs may be stronger today. Lower the pressure, listen carefully, and avoid turning one difficult moment into a verdict on the relationship.";
+  return {
+    showing: dayF.insight.feeling,
+    underneath: d.underneath,
+    need: dayF.insight.needs,
+    notAssume: d.notAssume,
+    approach: d.approach,
+    opener: d.opener,
+    datingEnergy,
+    grounding: `Keep your own limits and needs visible while supporting her. ${insightToSecondPerson(dayM.insight.needs)}`,
+  };
+}
+
 function getArchetype(profile, lunar, element, mayan, astroEvent, venusDay, saturnDay) {
   const t = astroEvent?.type;
   if (profile === "M") {
@@ -3294,11 +3357,14 @@ function App() {
         const vibe = getVibe(dayM, dayF);
         const dailyGuidance = getDailyTogetherGuidance(dayM, dayF, vibe, selected);
         const dating = getDatingInsight(dayM, dayF, vibe);
+        const herDating = getHerDatingInsight(dayM, dayF, vibe);
         const stars = [1,2,3,4,5].map(n => n <= vibe.score ? vibe.color : "rgba(237,229,216,0.12)");
         const copyKey = `together-${selected}`;
         const datingCopyKey = `dating-${selected}`;
+        const herDatingCopyKey = `her-dating-${selected}`;
         const togetherText = `${dayM.primary.text}\n\n${dayF.primary.text}\n\n${dailyGuidance}`;
         const datingText = `UNDERSTANDING HIM TODAY\n\nHOW HE MAY BE SHOWING UP\n${dating.showing}\n\nWHAT MAY BE UNDERNEATH IT\n${dating.underneath}\n\nWHAT HE MAY NEED FROM YOU\n${dating.need}\n\nWHAT NOT TO ASSUME\n${dating.notAssume}\n\nHOW TO APPROACH HIM\n${dating.approach}\n\nCONVERSATION OPENER\n“${dating.opener}”\n\nDATING ENERGY TODAY\n${dating.datingEnergy}\n\nYOUR GROUNDING REMINDER\n${dating.grounding}`;
+        const herDatingText = `UNDERSTANDING HER TODAY\n\nHOW SHE MAY BE SHOWING UP\n${herDating.showing}\n\nWHAT MAY BE UNDERNEATH IT\n${herDating.underneath}\n\nWHAT SHE MAY NEED FROM YOU\n${herDating.need}\n\nWHAT NOT TO ASSUME\n${herDating.notAssume}\n\nHOW TO APPROACH HER\n${herDating.approach}\n\nCONVERSATION OPENER\n“${herDating.opener}”\n\nDATING ENERGY TODAY\n${herDating.datingEnergy}\n\nYOUR GROUNDING REMINDER\n${herDating.grounding}`;
         return (
           <div style={{ padding: "14px 12px 80px" }}>
             {/* Date header */}
@@ -3393,6 +3459,32 @@ function App() {
               ))}
               <div style={{ fontSize: "9px", color: "rgba(237,229,216,0.28)", fontStyle: "italic", lineHeight: "1.5", borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "9px", marginTop: "10px" }}>
                 Reflective dating guidance—not proof of exactly what he is thinking or feeling.
+              </div>
+            </div>
+
+            {/* Dating insight for him about her */}
+            <div style={{ background: "rgba(155,126,200,0.08)", border: "1px solid rgba(155,126,200,0.34)", borderRadius: "12px", padding: "14px", marginTop: "14px" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "10px", marginBottom: "12px" }}>
+                <div style={{ fontSize: "9px", letterSpacing: "2px", textTransform: "uppercase", color: "rgba(212,160,192,0.92)" }}>💜 Understanding Her Today</div>
+                <button onClick={() => copy(herDatingText, herDatingCopyKey)} style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(155,126,200,0.4)", color: copied === herDatingCopyKey ? "#D4A0C0" : "rgba(237,229,216,0.46)", fontSize: "9px", padding: "5px 8px", borderRadius: "4px", cursor: "pointer" }}>{copied === herDatingCopyKey ? "✓ COPIED" : "COPY"}</button>
+              </div>
+              {[
+                ["How She May Be Showing Up", "🧭", herDating.showing],
+                ["What May Be Underneath It", "🌊", herDating.underneath],
+                ["What She May Need From You", "🌱", herDating.need],
+                ["What Not to Assume", "🕊️", herDating.notAssume],
+                ["How to Approach Her", "🤝", herDating.approach],
+                ["Conversation Opener", "💬", `“${herDating.opener}”`],
+                ["Dating Energy Today", "💞", herDating.datingEnergy],
+                ["Your Grounding Reminder", "⚓", herDating.grounding],
+              ].map(([label, icon, text]) => (
+                <div key={label} style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "9px", marginTop: "9px" }}>
+                  <div style={{ fontSize: "8px", letterSpacing: "1.5px", textTransform: "uppercase", color: "rgba(212,160,192,0.7)", marginBottom: "4px" }}>{icon} {label}</div>
+                  <div style={{ fontSize: "12px", lineHeight: "1.68", color: "rgba(237,229,216,0.7)" }}>{text}</div>
+                </div>
+              ))}
+              <div style={{ fontSize: "9px", color: "rgba(237,229,216,0.28)", fontStyle: "italic", lineHeight: "1.5", borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "9px", marginTop: "10px" }}>
+                Reflective dating guidance—not proof of exactly what she is thinking or feeling.
               </div>
             </div>
           </div>
