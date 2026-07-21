@@ -115,7 +115,7 @@ const PROFILE_DETAILS = {
     relationshipStyle: "May value loyalty, respect, autonomy, friendship, and practical dependability. Care may appear through consistency or provision, but private loyalty is most secure when it is also expressed through contact, reassurance, planning, vulnerability, and follow-through.",
     relationshipNeeds: "Respectful directness, room to process, appreciation that is specific, partnership without control, and connection that allows both closeness and independence",
     growthEdges: "Watch for assuming intentions are visible, using silence instead of an unfinished truth, staying in strategy when vulnerability is needed, or carrying responsibility until rest feels impossible",
-    accuracy: "Verified: date, birthplace, Aquarius Sun, Life Path 8, and Water Pig. Not calculated: Moon, Rising, houses, exact aspects, or Human Design without a birth time.",
+    accuracy: "Verified from the available birth information: date, birthplace, Aquarius Sun, Life Path 8, and Water Pig. Interpretive guidance below is reflective rather than predictive. Not calculated: Moon, Rising, houses, exact aspects, or Human Design without a birth time.",
     lifePath: "8 — The Powerhouse: ambition, authority, mastery, built to lead and build lasting things", profection: "Calculated from his age for each selected date (his Jan 21 birthday opens each new profection year)",
     chinese: "Water Pig 🐖 — born before the Feb 2, 1984 Lunar New Year; loyal, generous, perceptive, and quietly strong",
     hd: "Not calculated — exact birth time is required for Human Design type, authority, profile, channels, and centers" },
@@ -292,7 +292,7 @@ const NETERU = {
 
 const ASTRO_EVENTS = {};
 // Full-year accurate events. Day 0 = June 2, 2026.
-ASTRO_EVENTS[27]  = { type: "full_rx",   icon: "🌕", color: "#D4A843", labelM: "Full Moon + Mercury Rx Begins", noteM: "Capricorn full moon AND Mercury stations retrograde. Big day — acknowledge him, don't start anything new.", labelF: "Full Moon + Mercury Rx Begins", noteF: "Capricorn full moon AND Mercury stations retrograde. Emotions high, communication messy. Hold space." };
+ASTRO_EVENTS[27]  = { type: "full_rx",   icon: "🌕", color: "#D4A843", labelM: "Full Moon + Mercury Rx Begins", noteM: "Capricorn full moon AND Mercury stations retrograde. Slow down, check details, and choose new commitments thoughtfully rather than treating them as forbidden.", labelF: "Full Moon + Mercury Rx Begins", noteF: "Capricorn full moon AND Mercury stations retrograde. Emotions may feel heightened; allow extra care for timing and communication." };
 ASTRO_EVENTS[57]  = { type: "aqua_moon", icon: "♒", color: "#9B7EC8", labelM: "Aquarius Full Moon", noteM: "The full moon in his OWN sign — the most potent lunar day of the season for him.", labelF: "Aquarius Full Moon", noteF: "The full moon in her OWN sign — the most potent lunar day of the season for her." };
 ASTRO_EVENTS[71]  = { type: "solar_ecl", icon: "🌑", color: "#C07850", labelM: "Total Solar Eclipse (Leo)", noteM: "A doorway. Something new is set in motion — bigger than a normal new moon. Don't force it.", labelF: "Total Solar Eclipse (Leo)", noteF: "A doorway. A powerful new chapter opening. Let it unfold." };
 ASTRO_EVENTS[87]  = { type: "lunar_ecl", icon: "🌕", color: "#C07850", labelM: "Partial Lunar Eclipse (Pisces)", noteM: "Something is completing. Let him process — release, not crisis.", labelF: "Partial Lunar Eclipse (Pisces)", noteF: "A deep emotional release. Honor it, don't fix it." };
@@ -300,7 +300,7 @@ ASTRO_EVENTS[249] = { type: "solar_ecl", icon: "♒", color: "#9B7EC8", labelM: 
 ASTRO_EVENTS[263] = { type: "lunar_ecl", icon: "🌕", color: "#C07850", labelM: "Penumbral Lunar Eclipse (Virgo)", noteM: "A quiet completion. Reflect on what the year has shifted.", labelF: "Penumbral Lunar Eclipse (Virgo)", noteF: "A gentle release. Let something settle and close." };
 function fillRetro(a, b) {
   for (let i = a; i <= b; i++) {
-    if (!ASTRO_EVENTS[i]) ASTRO_EVENTS[i] = { type: "retrograde", icon: "☿", color: "#7B9CDA", labelM: "Mercury Retrograde", noteM: "Scholar energy — review, reflect, revisit. Don't launch anything new.", labelF: "Mercury Retrograde", noteF: "Time to review, not initiate. Patience with miscommunication." };
+    if (!ASTRO_EVENTS[i]) ASTRO_EVENTS[i] = { type: "retrograde", icon: "☿", color: "#7B9CDA", labelM: "Mercury Retrograde", noteM: "Scholar energy — review, reflect, and revisit. New steps are still possible; confirm the details and leave room to adjust.", labelF: "Mercury Retrograde", noteF: "Review carefully and communicate patiently. If initiating something new, build in flexibility and double-check assumptions." };
   }
 }
 fillRetro(28, 51);    // Jun 30 – Jul 23, 2026 (Cancer)
@@ -2817,18 +2817,26 @@ function insightToSecondPerson(text) {
     .replace(/\bHe will\b/g, "You will").replace(/\bhe will\b/g, "you will")
     .replace(/\bHe'll\b/g, "You'll").replace(/\bhe'll\b/g, "you'll")
     .replace(/\bHe doesn't\b/g, "You don't").replace(/\bhe doesn't\b/g, "you don't")
+    .replace(/\bHe does not\b/g, "You do not").replace(/\bhe does not\b/g, "you do not")
     .replace(/\bHe isn't\b/g, "You aren't").replace(/\bhe isn't\b/g, "you aren't")
     .replace(/\bHe was\b/g, "You were").replace(/\bhe was\b/g, "you were")
-    .replace(/\bHe ((?:\w+ly )?)(needs|wants|brings|loves|sees|knows|feels|builds|seems|lets|gives|tells|respects|protects|names|meets|makes|holds|grounds|cares|answers|advises|trusts|shares|puts|commands|checks|acknowledges|works|waits|values|uses|turns|takes|stays|speaks|slows|moves)\b/g, (_, adverb, verb) => `You ${adverb}${verb.replace(/s$/, "")}`)
-    .replace(/\bhe ((?:\w+ly )?)(needs|wants|brings|loves|sees|knows|feels|builds|seems|lets|gives|tells|respects|protects|names|meets|makes|holds|grounds|cares|answers|advises|trusts|shares|puts|commands|checks|acknowledges|works|waits|values|uses|turns|takes|stays|speaks|slows|moves)\b/g, (_, adverb, verb) => `you ${adverb}${verb.replace(/s$/, "")}`)
+    .replace(/\bHe ((?:\w+ly )?)(needs|wants|brings|loves|sees|knows|feels|builds|seems|lets|gives|tells|respects|protects|names|meets|makes|holds|grounds|cares|answers|advises|trusts|shares|puts|commands|checks|acknowledges|works|waits|values|uses|turns|takes|stays|speaks|slows|moves|separates|communicates|initiates|follows|organizes|decides|appears|assumes|offers|expresses|returns|carries)\b/g, (_, adverb, verb) => `You ${adverb}${verb.replace(/s$/, "")}`)
+    .replace(/\bhe ((?:\w+ly )?)(needs|wants|brings|loves|sees|knows|feels|builds|seems|lets|gives|tells|respects|protects|names|meets|makes|holds|grounds|cares|answers|advises|trusts|shares|puts|commands|checks|acknowledges|works|waits|values|uses|turns|takes|stays|speaks|slows|moves|separates|communicates|initiates|follows|organizes|decides|appears|assumes|offers|expresses|returns|carries)\b/g, (_, adverb, verb) => `you ${adverb}${verb.replace(/s$/, "")}`)
     .replace(/\bHis\b/g, "Your").replace(/\bhis\b/g, "your")
     .replace(/\bHim\b/g, "You").replace(/\bhim\b/g, "you")
     .replace(/\bHe\b/g, "You").replace(/\bhe\b/g, "you");
 }
 
+function softenNeedLanguage(text) {
+  return text
+    .replace(/\bHe needs\b/g, "He may benefit from").replace(/\bhe needs\b/g, "he may benefit from")
+    .replace(/\bShe needs\b/g, "She may benefit from").replace(/\bshe needs\b/g, "she may benefit from")
+    .replace(/\bYou need\b/g, "You may benefit from").replace(/\byou need\b/g, "you may benefit from");
+}
+
 function getHisShareText(day, personal) {
   const date = `${MONTHS[day.date.getUTCMonth()]} ${day.date.getUTCDate()}, ${day.date.getUTCFullYear()}`;
-  return `${date}\n\nHIS PERSONAL ENERGY · ${personal.label}\n${personal.text}\n\nYOU MAY BE FEELING\n${insightToSecondPerson(day.insight.feeling)}\n\nWHAT YOU NEED\n${insightToSecondPerson(day.insight.needs)}\n\nLOVE & RELATIONSHIPS\n${personal.relationship}\n\nHOW TO USE THIS ENERGY\n${personal.bestUse}\n\nWATCH FOR\n${insightToSecondPerson(day.insight.watchFor)}\n\nDAILY AFFIRMATION\n${day.primary.text}\n\nALTERNATE AFFIRMATION\n${day.alt.text}`;
+  return `${date}\n\nHIS PERSONAL ENERGY · ${personal.label}\n${personal.text}\n\nYOU MAY BE FEELING\n${insightToSecondPerson(day.insight.feeling)}\n\nWHAT MAY SUPPORT YOU\n${softenNeedLanguage(insightToSecondPerson(day.insight.needs))}\n\nLOVE & RELATIONSHIPS\n${personal.relationship}\n\nHOW TO USE THIS ENERGY\n${personal.bestUse}\n\nWATCH FOR\n${insightToSecondPerson(day.insight.watchFor)}\n\nDAILY AFFIRMATION\n${day.primary.text}\n\nALTERNATE AFFIRMATION\n${day.alt.text}`;
 }
 
 function herInsightToSecondPerson(text) {
@@ -3838,7 +3846,7 @@ function App() {
               };
               const ph = cur.profHouse;
               const ordinal = n => `${n}${n === 1 ? "st" : n === 2 ? "nd" : n === 3 ? "rd" : "th"}`;
-              const profText = ph ? `${ordinal(ph)} House year — ${HOUSE_THEMES[ph]} (as of ${cur.date.toLocaleDateString("en-US", { timeZone: "UTC", month: "short", day: "numeric", year: "numeric" })})` : D.profection;
+              const profText = ph ? `${ordinal(ph)} House year — ${HOUSE_THEMES[ph]} (as of ${cur.date.toLocaleDateString("en-US", { timeZone: "UTC", month: "short", day: "numeric", year: "numeric" })})${profile === "M" ? ". The annual house is age-based; its ruling planet cannot be determined without his birth time and Ascendant." : ""}` : D.profection;
               const rows = [
                 ["☀️ Sun", D.sun],
                 ["🌙 Moon", D.moon],
@@ -4006,15 +4014,16 @@ function App() {
             {cur.energySignal && (
               <div style={{ background: `${cur.archData.color}0d`, border: `1px solid ${cur.archData.color}22`, borderRadius: "8px", padding: "9px 10px", marginBottom: "11px" }}>
                 <div style={{ display: "flex", justifyContent: "space-between", gap: "8px", alignItems: "center", marginBottom: "5px" }}>
-                  <div style={{ fontSize: "8px", letterSpacing: "1.5px", textTransform: "uppercase", color: `${cur.archData.color}bb` }}>Prediction Signal</div>
-                  <div style={{ fontSize: "9px", color: "rgba(237,229,216,0.55)" }}>{cur.energySignal.confidence} convergence · {Math.round(cur.energySignal.confidenceRatio * 100)}%</div>
+                  <div style={{ fontSize: "8px", letterSpacing: "1.5px", textTransform: "uppercase", color: `${cur.archData.color}bb` }}>Reflection Theme</div>
+                  <div style={{ fontSize: "9px", color: "rgba(237,229,216,0.55)" }}>{cur.energySignal.confidence} symbolic alignment</div>
                 </div>
                 <div style={{ fontSize: "10px", lineHeight: "1.55", color: "rgba(237,229,216,0.48)" }}>{cur.energySignal.reasons.join(" · ")}</div>
+                <div style={{ fontSize: "9px", lineHeight: "1.5", color: "rgba(237,229,216,0.32)", marginTop: "5px", fontStyle: "italic" }}>A reflective prompt—not a verified prediction of feelings, behavior, or events.</div>
               </div>
             )}
             {[
               { label: "Feeling",    icon: "💭", text: cur.insight.feeling },
-              { label: "Needs",      icon: "🌱", text: cur.insight.needs },
+              { label: "May Benefit From", icon: "🌱", text: softenNeedLanguage(cur.insight.needs) },
               { label: "Watch For",  icon: "👁",  text: cur.insight.watchFor },
             ].map(({ label, icon, text }) => (
               <div key={label} style={{ marginBottom: "10px" }}>
@@ -4031,7 +4040,7 @@ function App() {
           {profile === "M" && (() => {
             const personal = getHisPersonalEnergy(cur, selected);
             const hisFeeling = insightToSecondPerson(cur.insight.feeling);
-            const hisNeed = insightToSecondPerson(cur.insight.needs);
+            const hisNeed = softenNeedLanguage(insightToSecondPerson(cur.insight.needs));
             const hisWatch = insightToSecondPerson(cur.insight.watchFor);
             const shareCopyKey = `his-share-${selected}`;
             return (
@@ -4049,7 +4058,7 @@ function App() {
                 <div style={{ marginBottom: "12px" }}>
                   {[
                     ["You May Be Feeling", "🪞", hisFeeling],
-                    ["What You Need", "🌱", hisNeed],
+                    ["What May Support You", "🌱", hisNeed],
                     ["Love & Relationships", "💞", personal.relationship],
                     ["How to Use This Energy", "✨", personal.bestUse],
                     ["Watch For", "👁", hisWatch],
