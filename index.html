@@ -290,6 +290,89 @@ const NETERU = {
   },
 };
 
+// Modern Kemetic reflection cycle for Him. This is an explicitly symbolic
+// personalization layer, not a reconstructed ancient Egyptian divination method.
+// His Life Path (8) and birth day (21) create a stable personal offset; the
+// selected day advances the cycle so the Kemetic principle varies by date.
+const HIM_KEMETIC_CYCLE = [
+  { n: "Djehuti (Thoth)", d: "discernment, language, measured thought", feeling: "Djehuti invites him to distinguish what he knows from what still needs a question.", support: "Support may come through accurate information, patient listening, and language that leaves room for refinement.", watch: "Watch for analysis becoming a substitute for saying the unfinished truth." },
+  { n: "Ma'at", d: "truth, balance, reciprocity, sacred order", feeling: "Ma'at brings attention to whether his inner intentions and visible actions are in balance.", support: "Support may come through one honest exchange in which expectations, effort, and follow-through are made mutual.", watch: "Watch for calling the relationship secure when its balance is not being demonstrated consistently." },
+  { n: "Ptah", d: "creation, craftsmanship, purposeful building", feeling: "Ptah emphasizes the part of him that wants to make something useful, stable, or lasting.", support: "Support may come through a practical next step, protected focus, and acknowledgment of what he is steadily building.", watch: "Watch for measuring his worth only by output or trying to solve an emotional need as if it were only a task." },
+  { n: "Khepri", d: "becoming, renewal, movement at dawn", feeling: "Khepri frames today as a point of becoming: an old approach may be ready to change before the new one feels complete.", support: "Support may come through permission to begin differently without demanding certainty about the entire path.", watch: "Watch for repeating a familiar response simply because transformation feels temporarily unfamiliar." },
+  { n: "Ausar (Osiris)", d: "endurance, restoration, the enduring heart", feeling: "Ausar highlights loyalty, restoration, and what he is willing to sustain beyond the intensity of one moment.", support: "Support may come through dependable contact, quiet devotion, and repairing one promise through action.", watch: "Watch for keeping loyalty private when the relationship needs an observable sign that it is still being chosen." },
+  { n: "Heru (Horus)", d: "clear sight, rightful action, honorable leadership", feeling: "Heru asks him to see the situation from a wider height and lead through clarity rather than control.", support: "Support may come through respectful autonomy, a direct decision, and action aligned with what he says matters.", watch: "Watch for defensiveness turning leadership into distance or making receptivity feel like a loss of authority." },
+  { n: "Anpu (Anubis)", d: "discernment at thresholds, protection, guidance", feeling: "Anpu emphasizes the threshold between reflection and action, asking what should be carried forward and what should be released.", support: "Support may come through privacy with a boundary, calm reassurance, and a specific time to return to the conversation.", watch: "Watch for remaining at the threshold indefinitely when a clear next step or honest ending is needed." },
+];
+
+function getHisKemeticReflection(dayIndex) {
+  const lifePath = 8, birthDay = 21;
+  return HIM_KEMETIC_CYCLE[(dayIndex + lifePath + birthDay) % HIM_KEMETIC_CYCLE.length];
+}
+
+// Her cycle uses the same transparent method with her Life Path 3 and birth
+// day 11, while the language is tailored to her communication, recognition,
+// emotional depth, boundaries, and sustainable Projector energy.
+const HER_KEMETIC_CYCLE = [
+  { n: "Djehuti (Thoth)", d: "language, insight, discernment, clear transmission", feeling: "Djehuti emphasizes her gift for finding language for an insight that others may not have recognized yet.", support: "Support may come through a receptive listener, precise questions, and enough quiet to translate perception without overexplaining it.", watch: "Watch for trying to prove an insight to someone who has not shown readiness to receive it." },
+  { n: "Ma'at", d: "truth, balance, reciprocity, sacred order", feeling: "Ma'at draws her attention to whether affection, recognition, effort, and honesty are moving in both directions.", support: "Support may come through direct communication and one observable act that restores reciprocity without requiring her to carry the entire connection.", watch: "Watch for preserving surface harmony when her deeper truth is asking for a respectful boundary or clearer agreement." },
+  { n: "Auset (Isis)", d: "healing, devotion, intuitive restoration", feeling: "Auset honors her capacity to perceive, nurture, and restore while reminding her that care does not require self-abandonment.", support: "Support may come through receiving tenderness, privacy, and practical care without having to organize or earn it.", watch: "Watch for becoming indispensable as a way of securing love or recognition." },
+  { n: "Sekhmet", d: "protective fire, courage, disciplined power", feeling: "Sekhmet gives her intensity a protective purpose and asks what truly deserves her fire today.", support: "Support may come through movement, an honest boundary, and a constructive place for anger or urgency to become clear action.", watch: "Watch for a protective response becoming stronger than the present evidence or closing the door before clarification is possible." },
+  { n: "Het-Heru (Hathor)", d: "love, beauty, pleasure, music, relational joy", feeling: "Het-Heru invites warmth, attraction, creativity, and pleasure to be valid information—not rewards postponed until every duty is complete.", support: "Support may come through specific affection, play, beauty, music, and connection that feels freely chosen and alive.", watch: "Watch for accepting attention that admires the surface while overlooking her depth, boundaries, or need for reciprocity." },
+  { n: "Nut", d: "spaciousness, perspective, the sky that holds complexity", feeling: "Nut offers enough inner space for several feelings or possibilities to exist without forcing an immediate conclusion.", support: "Support may come through rest, reduced emotional noise, and perspective wide enough to separate her own response from the atmosphere around her.", watch: "Watch for absorbing the whole emotional environment and assuming every intensity belongs to her." },
+  { n: "Nebet-Het (Nephthys)", d: "thresholds, endings, hidden wisdom, transition", feeling: "Nebet-Het supports her at the threshold between what has completed and what is not ready to be named yet.", support: "Support may come through protected solitude, gentle closure, and a dependable connection that does not intrude on necessary processing.", watch: "Watch for remaining loyal to an expired pattern because uncertainty makes transition feel less safe than familiarity." },
+];
+
+function getHerKemeticReflection(dayIndex) {
+  const lifePath = 3, birthDay = 11;
+  return HER_KEMETIC_CYCLE[(dayIndex + lifePath + birthDay) % HER_KEMETIC_CYCLE.length];
+}
+
+const MARIAH_KEMETIC_CYCLE = [
+  { n: "Seshat", d: "learning, stories, patterns, curiosity", feeling: "Seshat encourages Mariah to notice, learn, imagine, and put her experience into words or pictures.", support: "She may benefit from a calm question, a creative activity, and praise for curiosity rather than only correct answers.", watch: "Watch for perfectionism making learning feel like a test instead of an exploration." },
+  { n: "Auset (Isis)", d: "care, healing, belonging, loving strength", feeling: "Auset highlights Mariah's caring heart and her wish to know that the people she loves are safe and connected.", support: "She may benefit from warmth, reassurance, and permission to receive care without becoming responsible for everyone else's feelings.", watch: "Watch for her becoming the little caretaker when an adult should be carrying the emotional responsibility." },
+  { n: "Het-Heru (Hathor)", d: "joy, music, beauty, creativity", feeling: "Het-Heru invites Mariah to express herself through laughter, music, movement, art, or something beautiful.", support: "She may benefit from playful attention and a creative choice that belongs entirely to her.", watch: "Watch for filling every quiet moment with activity when her body may also need rest." },
+  { n: "Sekhmet", d: "courage, protection, strong feelings used wisely", feeling: "Sekhmet reminds Mariah that strong feelings can protect a boundary without making her bad or too much.", support: "She may benefit from movement, clear limits, and help naming what she wants to protect or change.", watch: "Watch for frustration becoming harsh self-criticism when something does not work immediately." },
+  { n: "Nut", d: "wonder, imagination, spaciousness, the starry sky", feeling: "Nut gives Mariah room to dream widely and hold more than one feeling or possibility at the same time.", support: "She may benefit from quiet imagination, unhurried conversation, and reassurance that she does not need an immediate answer.", watch: "Watch for drifting away from a practical need that can be solved with one small grounded step." },
+  { n: "Ma'at", d: "fairness, truth, balance, kind responsibility", feeling: "Ma'at may make Mariah especially aware of what feels fair, truthful, or out of balance around her.", support: "She may benefit from being heard carefully and included in an age-appropriate solution without being asked to solve the adult problem.", watch: "Watch for her believing that keeping everyone happy is the same as creating real fairness." },
+  { n: "Bastet", d: "play, comfort, confidence, joyful protection", feeling: "Bastet supports Mariah's playful courage and her instinct to seek both freedom and a safe place to return to.", support: "She may benefit from affection, humor, a cozy reset, and room to try something in her own way.", watch: "Watch for teasing or play covering a feeling she is unsure how to explain directly." },
+];
+
+const ADEN_KEMETIC_CYCLE = [
+  { n: "Heru (Horus)", d: "courage, clear sight, honorable action", feeling: "Heru encourages Aden to be brave enough to try while remembering that courage also includes asking for help.", support: "He may benefit from a meaningful choice, encouragement, and room to attempt the next step before an adult takes over.", watch: "Watch for needing to win or appear fearless when the wiser choice is to pause, learn, or accept support." },
+  { n: "Hapi", d: "generosity, nourishment, helpful flow", feeling: "Hapi highlights Aden's generous heart and the satisfaction he may feel when his help genuinely matters.", support: "He may benefit from one useful job, a sincere thank-you, and reassurance that he is loved even when he is not helping.", watch: "Watch for saying yes to keep everyone happy when he has a different preference or needs rest." },
+  { n: "Ptah", d: "making, building, patience, practical creativity", feeling: "Ptah supports Aden's desire to build, fix, arrange, or understand how something works.", support: "He may benefit from hands-on learning, enough time to experiment, and praise for persistence rather than only the finished result.", watch: "Watch for frustration rising when his hands cannot yet create what his mind can already imagine." },
+  { n: "Bes", d: "family protection, humor, home, everyday courage", feeling: "Bes brings playful protective energy and may strengthen Aden's wish to keep home and loved ones feeling safe.", support: "He may benefit from laughter, physical play, a clear family role, and reassurance that adults are responsible for adult safety.", watch: "Watch for him becoming overly alert to conflict or believing he must protect everyone himself." },
+  { n: "Djehuti (Thoth)", d: "questions, language, learning, thoughtful choices", feeling: "Djehuti encourages Aden to ask why, compare possibilities, and find words for what he is thinking.", support: "He may benefit from patient answers, a puzzle or story, and time to explain his reasoning without being rushed.", watch: "Watch for debating every direction when the real need is more information, a simple boundary, or a short break." },
+  { n: "Ra", d: "warmth, confidence, visibility, life-giving energy", feeling: "Ra supports Aden in being seen, sharing enthusiasm, and bringing warmth to the people around him.", support: "He may benefit from specific recognition, outdoor movement, and a chance to show something he feels proud of.", watch: "Watch for attention-seeking becoming the only way he knows to ask for connection." },
+  { n: "Anpu (Anubis)", d: "guidance, transitions, loyalty, safe thresholds", feeling: "Anpu may help Aden move through a change, ending, or unfamiliar step with quiet courage.", support: "He may benefit from knowing what happens next, carrying one familiar comfort, and having a trusted adult stay emotionally available.", watch: "Watch for silence being mistaken for ease when he may still be studying whether the transition feels safe." },
+];
+
+function getMariahKemeticReflection(dayIndex) {
+  const lifePath = 6, birthDay = 3;
+  return MARIAH_KEMETIC_CYCLE[(dayIndex + lifePath + birthDay) % MARIAH_KEMETIC_CYCLE.length];
+}
+
+function getAdenKemeticReflection(dayIndex) {
+  const lifePath = 9, birthDay = 18;
+  return ADEN_KEMETIC_CYCLE[(dayIndex + lifePath + birthDay) % ADEN_KEMETIC_CYCLE.length];
+}
+
+const KEMETIC_FORMULA_LABEL = {
+  M: "his Life Path 8 and birth day 21",
+  F: "her Life Path 3 and birth day 11",
+  G: "Mariah's Life Path 6 and birth day 3",
+  B: "Aden's Life Path 9 and birth day 18",
+};
+
+function applyChildKemeticInsight(rawInsight, kemetic) {
+  return {
+    ...rawInsight,
+    feeling: `${rawInsight.feeling} Kemetic reflection: ${kemetic.feeling}`,
+    needs: `${rawInsight.needs} ${kemetic.support}`,
+    watchFor: `${rawInsight.watchFor} ${kemetic.watch}`,
+  };
+}
+
 const ASTRO_EVENTS = {};
 // Full-year accurate events. Day 0 = June 2, 2026.
 ASTRO_EVENTS[27]  = { type: "full_rx",   icon: "🌕", color: "#D4A843", labelM: "Full Moon + Mercury Rx Begins", noteM: "Capricorn full moon AND Mercury stations retrograde. Slow down, check details, and choose new commitments thoughtfully rather than treating them as forbidden.", labelF: "Full Moon + Mercury Rx Begins", noteF: "Capricorn full moon AND Mercury stations retrograde. Emotions may feel heightened; allow extra care for timing and communication." };
@@ -3277,7 +3360,7 @@ function personalizeHisAffirmation(text, archetype, dayIndex) {
 
 // Expands her limited archetype feeling pool into date-specific emotional
 // language. These are reflective possibilities, not claims about her inner state.
-function expandHerDailyFeeling(base, archetype, lunar, element, dayIndex) {
+function expandHerDailyFeeling(base, archetype, lunar, element, dayIndex, kemetic) {
   const chartNuance = {
     fierce_mother: [
       "Her Scorpio Moon may concentrate the feeling privately before her Aries Venus expresses it directly.",
@@ -3354,10 +3437,10 @@ function expandHerDailyFeeling(base, archetype, lunar, element, dayIndex) {
   const chartPool = chartNuance[archetype] || chartNuance.cosmic_mentor;
   const chartText = chartPool[Math.floor(dayIndex / 2) % chartPool.length];
   const expressionText = expression[(dayIndex + archetype.length) % expression.length];
-  return `${base} ${chartText} ${expressionText} ${phaseNuance[lunar.phase]} ${elementNuance}`;
+  return `${base} ${chartText} ${expressionText} ${phaseNuance[lunar.phase]} ${elementNuance} Kemetic reflection: ${kemetic.feeling}`;
 }
 
-function expandHerDailyNeed(base, archetype, dayIndex) {
+function expandHerDailyNeed(base, archetype, dayIndex, kemetic) {
   const archetypeNeed = {
     fierce_mother: "Recognition and respectful partnership will reach her better than being managed, corrected, or asked to reduce her intensity.",
     soft_mother: "Support is most useful when it lowers a real demand and does not require her to organize the care she receives.",
@@ -3381,10 +3464,10 @@ function expandHerDailyNeed(base, archetype, dayIndex) {
     "Allow closeness and independence to exist together rather than forcing her to choose between them.",
     "Make the next point of contact clear so neither person has to carry uncertainty alone.",
   ];
-  return `${base} ${archetypeNeed[archetype] || archetypeNeed.cosmic_mentor} ${delivery[(dayIndex * 5 + archetype.length) % delivery.length]}`;
+  return `${base} ${archetypeNeed[archetype] || archetypeNeed.cosmic_mentor} ${delivery[(dayIndex * 5 + archetype.length) % delivery.length]} ${kemetic.support}`;
 }
 
-function expandHerDailyWatch(base, archetype, dayIndex) {
+function expandHerDailyWatch(base, archetype, dayIndex, kemetic) {
   const distinctions = [
     "Notice the difference between what she directly observed and the meaning later assigned to it.",
     "A firmer tone may be protecting a tender need, but the need is still best clarified through a direct question.",
@@ -3410,12 +3493,12 @@ function expandHerDailyWatch(base, archetype, dayIndex) {
           : archetype === "inner_child"
             ? "Relief and play should restore her, not postpone a necessary conversation indefinitely."
             : "Guidance is most effective where it is recognized and welcomed.";
-  return `${base} ${distinctions[(dayIndex * 7 + archetype.length) % distinctions.length]} ${closing}`;
+  return `${base} ${distinctions[(dayIndex * 7 + archetype.length) % distinctions.length]} ${closing} ${kemetic.watch}`;
 }
 
 // His birth time is unknown, so these expansions use only verified profile
 // information plus the selected date's symbolic signals.
-function expandHisDailyFeeling(base, archetype, lunar, element, dayIndex) {
+function expandHisDailyFeeling(base, archetype, lunar, element, dayIndex, kemetic) {
   const profileNuance = {
     sovereign: [
       "His Aquarius independence and Life Path 8 drive may make him want respect, autonomy, and confidence in his ability to handle what is in front of him.",
@@ -3490,10 +3573,10 @@ function expandHisDailyFeeling(base, archetype, lunar, element, dayIndex) {
           ? "Wood symbolism favors growth, experimentation, and allowing the next direction to develop gradually."
           : "Metal symbolism favors precision, boundaries, and reducing the situation to what is relevant and actionable.";
   const nuancePool = profileNuance[archetype] || profileNuance.visionary;
-  return `${base} ${nuancePool[Math.floor(dayIndex / 2) % nuancePool.length]} ${expression[(dayIndex + archetype.length) % expression.length]} ${phaseNuance[lunar.phase]} ${elementNuance}`;
+  return `${base} ${nuancePool[Math.floor(dayIndex / 2) % nuancePool.length]} ${expression[(dayIndex + archetype.length) % expression.length]} ${phaseNuance[lunar.phase]} ${elementNuance} Kemetic reflection: ${kemetic.feeling}`;
 }
 
-function expandHisDailyNeed(base, archetype, dayIndex) {
+function expandHisDailyNeed(base, archetype, dayIndex, kemetic) {
   const archetypeNeed = {
     sovereign: "He may need respect, accurate recognition, and partnership that does not turn support into management.",
     strategist: "He may need uninterrupted processing time paired with one clear expectation about when communication will resume.",
@@ -3517,10 +3600,10 @@ function expandHisDailyNeed(base, archetype, dayIndex) {
     "Keep requests direct enough that he does not have to decode what support or reassurance should look like.",
     "Follow-through on both sides will matter more than a perfect conversation today.",
   ];
-  return `${base} ${archetypeNeed[archetype] || archetypeNeed.visionary} ${delivery[(dayIndex * 5 + archetype.length) % delivery.length]}`;
+  return `${base} ${archetypeNeed[archetype] || archetypeNeed.visionary} ${delivery[(dayIndex * 5 + archetype.length) % delivery.length]} ${kemetic.support}`;
 }
 
-function expandHisDailyWatch(base, archetype, dayIndex) {
+function expandHisDailyWatch(base, archetype, dayIndex, kemetic) {
   const distinctions = [
     "Private processing is healthy when it is communicated; unexplained silence can create a different impact than he intends.",
     "Internal loyalty may be real, but contact, reassurance, planning, and follow-through make that loyalty observable.",
@@ -3546,7 +3629,7 @@ function expandHisDailyWatch(base, archetype, dayIndex) {
           : archetype === "mystic"
             ? "He can remain connected even before he has the full explanation."
             : "Vision becomes trust through realistic action and follow-through.";
-  return `${base} ${distinctions[(dayIndex * 7 + archetype.length) % distinctions.length]} ${closing}`;
+  return `${base} ${distinctions[(dayIndex * 7 + archetype.length) % distinctions.length]} ${closing} ${kemetic.watch}`;
 }
 
 function buildDays(profile) {
@@ -3567,6 +3650,10 @@ function buildDays(profile) {
     const saturnDay  = (profile === "M" || profile === "F") && dow === 6;
     const transits = personalTransitsFor(profile, date);
     const profHouse = profectionHouse(profile, date);
+    const kemetic = profile === "M" ? getHisKemeticReflection(i)
+      : profile === "F" ? getHerKemeticReflection(i)
+        : profile === "G" ? getMariahKemeticReflection(i)
+          : getAdenKemeticReflection(i);
 
     // Birthday flag — boy turns 8 on July 18, 2026 (day 46)
     if (profile === "B" && m === 6 && d === 18) {  // UTC month/day
@@ -3589,18 +3676,18 @@ function buildDays(profile) {
     const insight  = profile === "F"
       ? {
           ...rawInsight,
-          feeling: expandHerDailyFeeling(rawInsight.feeling, archKey, lunar, element, i),
-          needs: expandHerDailyNeed(rawInsight.needs, archKey, i),
-          watchFor: expandHerDailyWatch(rawInsight.watchFor, archKey, i),
+          feeling: expandHerDailyFeeling(rawInsight.feeling, archKey, lunar, element, i, kemetic),
+          needs: expandHerDailyNeed(rawInsight.needs, archKey, i, kemetic),
+          watchFor: expandHerDailyWatch(rawInsight.watchFor, archKey, i, kemetic),
         }
       : profile === "M"
         ? {
             ...rawInsight,
-            feeling: expandHisDailyFeeling(rawInsight.feeling, archKey, lunar, element, i),
-            needs: expandHisDailyNeed(rawInsight.needs, archKey, i),
-            watchFor: expandHisDailyWatch(rawInsight.watchFor, archKey, i),
+            feeling: expandHisDailyFeeling(rawInsight.feeling, archKey, lunar, element, i, kemetic),
+            needs: expandHisDailyNeed(rawInsight.needs, archKey, i, kemetic),
+            watchFor: expandHisDailyWatch(rawInsight.watchFor, archKey, i, kemetic),
           }
-        : rawInsight;
+        : applyChildKemeticInsight(rawInsight, kemetic);
     const pool     = POOLS[profile];
     const affPool  = pool[archKey] || pool[FALLBACK[profile]];
     // In-order rotation: each archetype cycles through ALL its affirmations before repeating any
@@ -3642,13 +3729,13 @@ function buildDays(profile) {
     const chakra = CHAKRAS[i % 7];
     const hexagram = HEXAGRAMS[i % 64];
     const decan = getDecan(date);
-    const neter = NETERU[profile][archKey] || NETERU[profile][FALLBACK[profile]];
+    const neter = kemetic;
     // Personal transit: solar return season (birthday month) per person
     const BIRTH_MONTHDAY = { M: [0,21], F: [1,11], G: [2,3], B: [6,18] };
     const bd = BIRTH_MONTHDAY[profile];
     const personalTransit = (bd && m === bd[0]) ? "Solar Return season — the sun is near their birthday. A personally powerful, recharging month." : null;
 
-    return { date, sunSign, seasonNote, lunar, element, mayan, tone, energySignal, primary, alt, altArch, astroEvent, venusDay, saturnDay, archKey, archData, insight, chakra, hexagram, decan, neter, personalTransit, transits, profHouse };
+    return { date, sunSign, seasonNote, lunar, element, mayan, tone, energySignal, primary, alt, altArch, astroEvent, venusDay, saturnDay, archKey, archData, insight, chakra, hexagram, decan, neter, kemetic, personalTransit, transits, profHouse };
   });
 }
 
@@ -4019,6 +4106,13 @@ function App() {
                 </div>
                 <div style={{ fontSize: "10px", lineHeight: "1.55", color: "rgba(237,229,216,0.48)" }}>{cur.energySignal.reasons.join(" · ")}</div>
                 <div style={{ fontSize: "9px", lineHeight: "1.5", color: "rgba(237,229,216,0.32)", marginTop: "5px", fontStyle: "italic" }}>A reflective prompt—not a verified prediction of feelings, behavior, or events.</div>
+              </div>
+            )}
+            {cur.kemetic && (
+              <div style={{ background: "rgba(184,154,90,0.08)", border: "1px solid rgba(184,154,90,0.28)", borderRadius: "8px", padding: "10px", marginBottom: "11px" }}>
+                <div style={{ fontSize: "8px", letterSpacing: "1.5px", textTransform: "uppercase", color: "#C9A96E", marginBottom: "4px" }}>☥ Kemetic Reflection · {cur.kemetic.n}</div>
+                <div style={{ fontSize: "10px", lineHeight: "1.55", color: "rgba(237,229,216,0.55)" }}>{cur.kemetic.d}</div>
+                <div style={{ fontSize: "9px", lineHeight: "1.5", color: "rgba(237,229,216,0.32)", marginTop: "5px", fontStyle: "italic" }}>Calculated from {KEMETIC_FORMULA_LABEL[profile]}, plus the selected date. This is a modern symbolic reflection—not a historically verified Kemetic prediction method.</div>
               </div>
             )}
             {[
