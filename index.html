@@ -2220,7 +2220,18 @@ const VIBE_MATRIX = {
   "scholar+fierce_mother":    { score: 3, label: "Caution Meets Fire", color: "#C07850", icon: "📚", read: "He's reviewing and moving carefully; she's at full combustion. She may push; he may pump the brakes.", move: "She respects that he's not stalling — he's being precise. He acknowledges her urgency is real even if the timing isn't right." },
   "scholar+soft_mother":      { score: 4, label: "Slow + Soft", color: "#D4A0C0", icon: "🌙", read: "Both being called to move gently and review rather than push. Quietly compatible today.", move: "Low expectations on each other. Patient conversation. Neither one forces a conclusion today." },
   "scholar+inner_child":      { score: 2, label: "Study Hall vs Recess", color: "#8DB87A", icon: "⚡", read: "He needs mental quiet to process; she needs freedom and movement. Today's biggest mismatch.", move: "Agree to be in different modes and reconnect tonight. Trying to sync today will cost both of them." },
-  "scholar+wise_crone":       { score: 5, label: "Mastery Together", color: "#9B7EC8", icon: "🔮", read: "Both in deep review and discernment mode. Exceptional alignment — the most mentally sharp pairing today.", move: "Think through something together. Read. Discuss. Her knowing plus his precision is a formidable combination." },
+  "scholar+wise_crone":       {
+    score: 5,
+    label: "Mastery Together",
+    color: "#9B7EC8",
+    icon: "🔮",
+    read: "You are both in a thoughtful, truth-seeking mode. He brings careful analysis and a willingness to review the details; she brings discernment, intuition, and an ability to sense what is not being said. This is powerful relationship energy when insight is used to understand each other—not to evaluate, correct, or outsmart one another.",
+    move: "Choose one shared question, let each person give an uninterrupted read, and combine what is factual with what is felt before deciding on one next step.",
+    relationshipNeed: "The relationship needs intellectual respect, emotional honesty, and enough time for both people to process. Reassure each other that questions are an invitation into deeper understanding, not a test with a right answer.",
+    workTogether: "Let him organize the facts, options, and practical consequences. Let her identify the deeper pattern, emotional truth, and possible blind spots. Then trade roles briefly: he names what he feels, and she names what is concrete. The strongest decision will include all four perspectives.",
+    watchFor: "The shadow of this pairing is overanalysis, emotional distance, or quietly keeping score over who understands the situation better. Insight can become criticism if either person feels studied instead of loved.",
+    repair: "If tension appears, stop building the case. Each person names one thing they may be missing, reflects back the other’s concern without rebuttal, and asks: ‘What would help us feel like partners in this?’",
+  },
   "scholar+cosmic_mentor":    { score: 4, label: "Review + Reach", color: "#7B9CDA", icon: "💫", read: "He's reviewing the past; she's building toward the future. Complementary if they share what they're each seeing.", move: "He tells her what he learned from looking back. She tells him where it leads going forward." },
   "scholar+muse":             { score: 3, label: "Mind + Heart", color: "#D4A0C0", icon: "🌹", read: "He's in his head reviewing and refining; she wants to connect and be seen. Risk of talking past each other.", move: "He puts the analysis down for one genuine moment of presence. She meets him in the intellectual first." },
   "scholar+priestess":        { score: 5, label: "Precision + Truth", color: "#9B7EC8", icon: "☥", read: "Both truth-oriented, both reviewing, both cutting through noise. Exceptionally well-matched today.", move: "Be direct with each other about what you're each seeing. No softening. The clarity is the gift." },
@@ -2348,6 +2359,54 @@ function getHerPersonalEnergy(day, dayIndex) {
     "You do not have to hold everything perfectly to be deeply worthy of being held.",
     "Restoring yourself is not retreat—it is how you return to your own frequency.",
   ];
+  const directInner = [
+    "Internally, you may feel several steps ahead of the room. Your mind wants movement, your emotions want truth, and your outer composure is ready to turn both into a decision.",
+    "A stronger-than-usual need for authenticity may make anything vague, performative, or limiting feel especially noticeable. That sensitivity is information; use it with intention.",
+    "You may feel both independent and deeply invested today. The tension is not a contradiction—you want connection that can stand beside your strength without trying to contain it.",
+    "Confidence is rising through clarity rather than volume. Once you know what is true for you, your Capricorn steadiness can carry it further than urgency ever could.",
+  ];
+  const nurtureInner = [
+    "Internally, you may be processing more than your calm exterior reveals. Your mind needs quiet, your emotions need room, and your body may be asking you to stop carrying what has not been named.",
+    "Your independence may look like distance today, but it is more likely a need to hear your own thoughts again. Space helps you return with warmth instead of resentment.",
+    "You may be caught between wanting someone to notice what you need and not wanting to explain it. Honest, specific requests will protect your energy better than silent endurance.",
+    "Your sensitivity is turned inward today. What feels like low motivation may actually be your system asking for meaning, emotional safety, or a gentler pace.",
+  ];
+  const directRelationship = [
+    "In relationships, you need respect for your ideas and freedom to speak plainly. You are most open when the other person listens without becoming defensive or trying to reduce your vision to what feels familiar.",
+    "You may show love by offering solutions, momentum, or a wider perspective. Remember to name the affection underneath the contribution so your care is felt, not only understood intellectually.",
+    "Closeness works best today when it includes both engagement and autonomy. Invite someone into your thinking, but be clear about which decisions remain yours to make.",
+    "You are likely to respond well to direct appreciation and intelligent conversation. Generic reassurance may miss you; accurate recognition will reach you.",
+  ];
+  const nurtureRelationship = [
+    "In relationships, you need closeness that does not demand immediate access to every thought or feeling. A steady presence and a low-pressure check-in will feel safer than repeated questioning.",
+    "You may need care before advice. The most supportive person today will notice the load, offer something concrete, and allow you to receive without making you justify your exhaustion.",
+    "Space and reassurance need to exist together. Tell the people you love that you are restoring rather than withdrawing, and ask them to stay steady while you find your center.",
+    "Your heart may be more tender than your presentation suggests. You need consistency, emotional honesty, and proof that softness will not be used to underestimate you.",
+  ];
+  const directNeeds = [
+    "You need a meaningful challenge, a truthful exchange, and one visible sign that your energy is moving something forward.",
+    "You need room to lead without carrying everything alone. Ask for capable partnership, not passive agreement.",
+    "You need your originality welcomed and your standards respected. Spend less energy persuading people who are committed to the smaller version.",
+    "You need movement and a clear choice. Too many open loops will drain the focus that is available to you now.",
+  ];
+  const nurtureNeeds = [
+    "You need reduced demands, emotional breathing room, and care that does not create another task for you to manage.",
+    "You need permission to be undecided while your feelings settle. Clarity will return faster when it is not forced.",
+    "You need a safe place to put down competence and be met as a person—not only as the one who handles everything.",
+    "You need quiet, nourishment, and one honest conversation where you do not have to minimize what feels heavy.",
+  ];
+  const directWatch = [
+    "Watch for turning certainty into rigidity. Leave enough room for new information and for someone you trust to offer a perspective you did not consider.",
+    "Watch for moving so quickly that your emotional truth gets translated into a plan before it has actually been felt.",
+    "Watch for expecting others to infer the tenderness underneath your directness. Say what matters to you, not only what needs to happen.",
+    "Watch for taking over because it feels faster. Shared ownership may require patience, but it creates the partnership you actually want.",
+  ];
+  const nurtureWatch = [
+    "Watch for disappearing into self-sufficiency. Taking space is healthy; making people guess whether you are coming back creates avoidable distance.",
+    "Watch for treating exhaustion as evidence that the whole path is wrong. Restore your body before making a permanent conclusion.",
+    "Watch for saying you are fine because explaining feels tiring. One clear request can prevent quiet resentment from building.",
+    "Watch for using high standards against yourself when tenderness would produce a wiser response.",
+  ];
   const direct = day.tone === "direct";
   const openers = direct ? directOpeners : nurtureOpeners;
   const actions = direct ? directActions : nurtureActions;
@@ -2355,10 +2414,23 @@ function getHerPersonalEnergy(day, dayIndex) {
   const opener = openers[dayIndex % openers.length];
   const action = actions[Math.floor(dayIndex / openers.length) % actions.length];
   const closer = closers[Math.floor(dayIndex / (openers.length * actions.length)) % closers.length];
+  const innerPool = direct ? directInner : nurtureInner;
+  const relationshipPool = direct ? directRelationship : nurtureRelationship;
+  const needsPool = direct ? directNeeds : nurtureNeeds;
+  const watchPool = direct ? directWatch : nurtureWatch;
+  const inner = innerPool[(dayIndex + 1) % innerPool.length];
+  const relationship = relationshipPool[(dayIndex + 2) % relationshipPool.length];
+  const need = needsPool[(dayIndex + 3) % needsPool.length];
+  const watchFor = watchPool[dayIndex % watchPool.length];
   return {
     label: direct ? "⚡ Direct Energy" : "🌙 Nurture Energy",
     color: direct ? "#C9A96E" : "#9B7EC8",
     text: `${opener} ${action} ${closer}`,
+    inner,
+    relationship,
+    need,
+    bestUse: action,
+    watchFor,
   };
 }
 
@@ -2512,6 +2584,8 @@ function insightToSecondPerson(text) {
     .replace(/\bHe doesn't\b/g, "You don't").replace(/\bhe doesn't\b/g, "you don't")
     .replace(/\bHe isn't\b/g, "You aren't").replace(/\bhe isn't\b/g, "you aren't")
     .replace(/\bHe was\b/g, "You were").replace(/\bhe was\b/g, "you were")
+    .replace(/\bHe ((?:\w+ly )?)(needs|wants|brings|loves|sees|knows|feels|builds|seems|lets|gives|tells|respects|protects|names|meets|makes|holds|grounds|cares|answers|advises|trusts|shares|puts|commands|checks|acknowledges|works|waits|values|uses|turns|takes|stays|speaks|slows|moves)\b/g, (_, adverb, verb) => `You ${adverb}${verb.replace(/s$/, "")}`)
+    .replace(/\bhe ((?:\w+ly )?)(needs|wants|brings|loves|sees|knows|feels|builds|seems|lets|gives|tells|respects|protects|names|meets|makes|holds|grounds|cares|answers|advises|trusts|shares|puts|commands|checks|acknowledges|works|waits|values|uses|turns|takes|stays|speaks|slows|moves)\b/g, (_, adverb, verb) => `you ${adverb}${verb.replace(/s$/, "")}`)
     .replace(/\bHis\b/g, "Your").replace(/\bhis\b/g, "your")
     .replace(/\bHim\b/g, "You").replace(/\bhim\b/g, "you")
     .replace(/\bHe\b/g, "You").replace(/\bhe\b/g, "you");
@@ -2528,6 +2602,8 @@ function herInsightToSecondPerson(text) {
     .replace(/\bShe's\b/g, "You're").replace(/\bshe's\b/g, "you're")
     .replace(/\bShe may\b/g, "You may").replace(/\bshe may\b/g, "you may")
     .replace(/\bShe can\b/g, "You can").replace(/\bshe can\b/g, "you can")
+    .replace(/\bShe ((?:\w+ly )?)(needs|wants|brings|loves|sees|knows|feels|builds|seems|lets|gives|tells|respects|protects|names|meets|makes|holds|grounds|cares|answers|advises|trusts|shares|puts|commands|checks|acknowledges|works|waits|values|uses|turns|takes|stays|speaks|slows|moves)\b/g, (_, adverb, verb) => `You ${adverb}${verb.replace(/s$/, "")}`)
+    .replace(/\bshe ((?:\w+ly )?)(needs|wants|brings|loves|sees|knows|feels|builds|seems|lets|gives|tells|respects|protects|names|meets|makes|holds|grounds|cares|answers|advises|trusts|shares|puts|commands|checks|acknowledges|works|waits|values|uses|turns|takes|stays|speaks|slows|moves)\b/g, (_, adverb, verb) => `you ${adverb}${verb.replace(/s$/, "")}`)
     .replace(/\bHer\b/g, "Your").replace(/\bher\b/g, "your")
     .replace(/\bShe\b/g, "You").replace(/\bshe\b/g, "you");
 }
@@ -2595,7 +2671,7 @@ function getDatingInsight(dayM, dayF, vibe) {
   };
 }
 
-function getHerDatingInsight(dayM, dayF, vibe) {
+function getHerDatingInsight(dayM, dayF, vibe, dayIndex = 0) {
   const byArchetype = {
     fierce_mother: {
       underneath: "Her intensity may be protective rather than combative. She is often strongest where something important feels exposed or unsupported.",
@@ -2646,6 +2722,51 @@ function getHerDatingInsight(dayM, dayF, vibe) {
     : vibe.score === 3
       ? "You may be moving at different emotional speeds. Stay curious, clarify expectations, and do not make difference mean disconnection."
       : "Sensitivity or mismatched needs may be stronger today. Lower the pressure, listen carefully, and avoid turning one difficult moment into a verdict on the relationship.";
+  const relationshipNeeds = vibe.score >= 4 ? [
+    "The relationship needs shared direction today: name what matters to both of you, then let each person contribute in their own way.",
+    "The relationship needs appreciation that is specific and mutual. Say what you value in each other before moving into plans or problem-solving.",
+    "The relationship needs a little protected time with no outside demands, so emotional ease can become genuine closeness.",
+    "The relationship needs both freedom and reassurance—room to be yourselves, paired with a clear reminder that you are still choosing each other.",
+  ] : vibe.score === 3 ? [
+    "The relationship needs clarity without pressure. Say what each of you needs, check what the other actually heard, and agree on one realistic expectation.",
+    "The relationship needs room for two different rhythms. Connection will come from respecting the difference, not forcing the same mood or pace.",
+    "The relationship needs curiosity more than certainty. Ask before interpreting, especially if independence, quiet, or intensity could be mistaken for distance.",
+    "The relationship needs balanced effort: one person should not have to carry the emotional tone, the plan, and the follow-through alone.",
+  ] : [
+    "The relationship needs emotional safety before resolution. Slow the exchange down, lower defensiveness, and make understanding the first goal.",
+    "The relationship needs breathing room without disappearance. Be explicit about when you will reconnect so space does not feel like abandonment.",
+    "The relationship needs gentleness around mismatched needs. Neither person has to be wrong for the day to feel difficult.",
+    "The relationship needs repair in small steps: acknowledge the impact, clarify the intention, and choose one caring action instead of demanding instant harmony.",
+  ];
+  const teamworkByHerArchetype = {
+    fierce_mother: "Give her a meaningful lane to lead or protect while you keep the shared goal visible. Do not compete with her force; coordinate it.",
+    soft_mother: "Reduce the load before discussing the larger plan. Take ownership of a concrete task, then let her decide where her remaining energy belongs.",
+    inner_child: "Keep the goal simple and allow flexibility in how you reach it. A playful setting, movement, or change of scenery can make cooperation easier.",
+    wise_crone: "Invite her read before acting. Pair her discernment with your practical next step, and agree on what evidence would tell you the plan is working.",
+    cosmic_mentor: "Let her define the bigger purpose while you help turn it into today's priorities. Capture the vision, choose one step, and leave the rest for later.",
+    muse: "Begin with connection and inspiration, then shape the idea together. She is more likely to collaborate when she feels seen, not merely assigned a role.",
+    priestess: "Agree on the values and boundaries first. Once the plan feels honest and balanced, divide responsibilities clearly and follow through consistently.",
+  };
+  const frictionByScore = vibe.score >= 4 ? [
+    "Ease can lead to assumptions. Do not skip the check-in just because the connection feels natural; confirm priorities before moving together.",
+    "Strong chemistry can become overcommitment. If you generate a big plan together, decide what is truly for today and what can wait.",
+    "Feeling aligned can hide an unspoken need. Pause once and ask whether either of you is agreeing simply to preserve the good mood.",
+  ] : vibe.score === 3 ? [
+    "Different pacing could be mistaken for lack of care. Repair it by naming the difference plainly and choosing a time when both of you can be present.",
+    "Advice may land as control, or independence may land as rejection. Ask whether support, listening, or space is wanted before acting.",
+    "You may agree on the goal but not the method. Separate those two conversations, affirm the shared goal, and negotiate the method calmly.",
+  ] : [
+    "A tense moment could quickly become a story about the whole relationship. Stay with the specific issue, take a pause if needed, and return with one clear request.",
+    "Pushing for an answer may make one of you withdraw further. Set a gentle reconnection time and use the pause to regulate, not rehearse arguments.",
+    "Defensiveness may hide hurt on both sides. Start repair with what you can own, then ask what would help the other person feel understood.",
+  ];
+  const connectionMoves = [
+    "Take ten phone-free minutes and each answer: ‘What would help us feel like a team today?’",
+    "Choose one task to complete together, then do one enjoyable thing that has nothing to do with productivity.",
+    "Offer one specific appreciation and one specific form of help—without asking the other person to manage either gesture.",
+    "Make a small plan that includes both closeness and personal space, so neither need has to compete with the other.",
+    "End the day with a two-question check-in: ‘What felt supportive today?’ and ‘What should we do differently tomorrow?’",
+  ];
   return {
     showing: dayF.insight.feeling,
     underneath: d.underneath,
@@ -2654,6 +2775,10 @@ function getHerDatingInsight(dayM, dayF, vibe) {
     approach: d.approach,
     opener: d.opener,
     datingEnergy,
+    relationshipNeed: relationshipNeeds[(dayIndex + vibe.score) % relationshipNeeds.length],
+    teamwork: teamworkByHerArchetype[dayF.archKey] || teamworkByHerArchetype.cosmic_mentor,
+    frictionRepair: frictionByScore[(dayIndex + dayM.archKey.length + dayF.archKey.length) % frictionByScore.length],
+    connectionMove: connectionMoves[(dayIndex + vibe.score + dayF.archKey.length) % connectionMoves.length],
     grounding: `Keep your own limits and needs visible while supporting her. ${insightToSecondPerson(dayM.insight.needs)}`,
   };
 }
@@ -2768,9 +2893,43 @@ function getLunar(i) {
 }
 function getElement(i) { return ELEMENTS[i % 5]; }
 function getMayan(i) { return MAYAN_TONES[i % 13]; }
-function getBaseTone(lunar, element, mayan) {
-  const votes = [(lunar.phase === "waning" || lunar.phase === "new") ? "nurture" : "direct", element.tone, mayan.action];
-  return votes.filter(v => v === "nurture").length >= 2 ? "nurture" : "direct";
+// Date-based signals lead; rotating symbolic systems only break close calls.
+function getBaseTone(lunar, element, mayan, astroEvent, venusDay, saturnDay, profile) {
+  let score = 0;
+  let totalWeight = 0;
+  const reasons = [];
+  const add = (value, weight, reason) => {
+    score += value * weight;
+    totalWeight += weight;
+    reasons.push({ direction: value >= 0 ? "direct" : "nurture", weight, reason });
+  };
+  const lunarSignal = {
+    new:    { value: -1, weight: 3, reason: "New Moon favors reset, quiet, and inward attention" },
+    waxing: { value:  1, weight: 2.5, reason: "Waxing Moon supports momentum and outward growth" },
+    full:   { value:  1, weight: 3, reason: "Full Moon marks peak visibility and heightened energy" },
+    waning: { value: -1, weight: 2.5, reason: "Waning Moon favors release, review, and restoration" },
+  }[lunar.phase];
+  add(lunarSignal.value, lunarSignal.weight, lunarSignal.reason);
+  if (astroEvent) {
+    const eventSignal = {
+      retrograde: { value: -1, weight: 3, reason: "Mercury retrograde favors review over initiation" },
+      solar_ecl:  { value: -1, weight: 3.5, reason: "Solar eclipse favors observation and gradual integration" },
+      lunar_ecl:  { value: -1, weight: 3.5, reason: "Lunar eclipse favors processing and release" },
+      full_rx:    { value: -1, weight: 1.5, reason: "Full-Moon intensity is tempered by Mercury retrograde" },
+      aqua_moon:  { value:  1, weight: 3.5, reason: "Aquarius Full Moon strongly activates this Aquarius profile" },
+      birthday:   { value:  1, weight: 3, reason: "Birthday energy supports visibility and renewal" },
+    }[astroEvent.type];
+    if (eventSignal) add(eventSignal.value, eventSignal.weight, eventSignal.reason);
+  }
+  if (venusDay && profile === "F") add(1, 1.25, "Friday resonates with her Aquarius Venus and connection themes");
+  if (saturnDay) add(-1, 1.25, profile === "F" ? "Saturday emphasizes her Saturn-ruled Capricorn rising and the need to pace herself" : "Saturday emphasizes disciplined pacing and restoration");
+  add(element.tone === "direct" ? 1 : -1, 0.4, `${element.name} contributes a light symbolic ${element.tone} signal`);
+  add(mayan.action === "direct" ? 1 : -1, 0.35, `Mayan tone contributes a light symbolic ${mayan.action} signal`);
+  const tone = score >= 0 ? "direct" : "nurture";
+  const agreement = reasons.filter(r => r.direction === tone).reduce((sum, r) => sum + r.weight, 0);
+  const confidenceRatio = totalWeight ? agreement / totalWeight : 0.5;
+  const confidence = confidenceRatio >= 0.78 ? "Strong" : confidenceRatio >= 0.62 ? "Moderate" : "Mixed";
+  return { tone, confidence, confidenceRatio, reasons: reasons.sort((a, b) => b.weight - a.weight).slice(0, 3).map(r => r.reason) };
 }
 
 function buildDays(profile) {
@@ -2789,7 +2948,6 @@ function buildDays(profile) {
     let astroEvent = ASTRO_EVENTS[i] || null;
     const venusDay   = profile === "F" && dow === 5;
     const saturnDay  = (profile === "M" || profile === "F") && dow === 6;
-    const tone = getBaseTone(lunar, element, mayan);
     const transits = personalTransitsFor(profile, date);
     const profHouse = profectionHouse(profile, date);
 
@@ -2797,6 +2955,8 @@ function buildDays(profile) {
     if (profile === "B" && m === 6 && d === 18) {  // UTC month/day
       astroEvent = { type: "birthday", icon: "🎂", color: "#E0B84A", labelM: "", noteM: "", labelF: "", noteF: "" };
     }
+    const energySignal = getBaseTone(lunar, element, mayan, astroEvent, venusDay, saturnDay, profile);
+    const tone = energySignal.tone;
 
     const POOLS = { M: HIM_AFFIRMATIONS, F: HER_AFFIRMATIONS, G: GIRL_AFFIRMATIONS, B: BOY_AFFIRMATIONS };
     const FALLBACK = { M: "visionary", F: "cosmic_mentor", G: "dreamer", B: "brave_heart" };
@@ -2844,7 +3004,7 @@ function buildDays(profile) {
     const bd = BIRTH_MONTHDAY[profile];
     const personalTransit = (bd && m === bd[0]) ? "Solar Return season — the sun is near their birthday. A personally powerful, recharging month." : null;
 
-    return { date, sunSign, seasonNote, lunar, element, mayan, tone, primary, alt, altArch, astroEvent, venusDay, saturnDay, archKey, archData, insight, chakra, hexagram, decan, neter, personalTransit, transits, profHouse };
+    return { date, sunSign, seasonNote, lunar, element, mayan, tone, energySignal, primary, alt, altArch, astroEvent, venusDay, saturnDay, archKey, archData, insight, chakra, hexagram, decan, neter, personalTransit, transits, profHouse };
   });
 }
 
@@ -3179,7 +3339,7 @@ function App() {
               ))}
 
               <div style={{ fontSize: "9px", color: "rgba(237,229,216,0.3)", fontStyle: "italic", marginTop: "10px", lineHeight: "1.5", borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "8px" }}>
-                The astronomical layers (moon phase, eclipses, retrogrades, sun sign, decan) are computed from real sky positions. The symbolic layers are interpretive wisdom traditions, offered for reflection — not objective fact.
+                Moon phase is astronomically calculated; eclipses and retrogrades are mapped to dated events; sun season and decan are date-based approximations. Symbolic layers are interpretive traditions offered for reflection—not objective predictions.
               </div>
             </div>
           )}
@@ -3189,6 +3349,15 @@ function App() {
             <div style={{ fontSize: "8px", letterSpacing: "3px", textTransform: "uppercase", color: `${cur.archData.color}99`, marginBottom: "12px" }}>
               {cur.archData.icon} {(profile === "G" || profile === "B") ? "What Your Child May Need Today" : "How They May Be Feeling Today"}
             </div>
+            {cur.energySignal && (
+              <div style={{ background: `${cur.archData.color}0d`, border: `1px solid ${cur.archData.color}22`, borderRadius: "8px", padding: "9px 10px", marginBottom: "11px" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", gap: "8px", alignItems: "center", marginBottom: "5px" }}>
+                  <div style={{ fontSize: "8px", letterSpacing: "1.5px", textTransform: "uppercase", color: `${cur.archData.color}bb` }}>Prediction Signal</div>
+                  <div style={{ fontSize: "9px", color: "rgba(237,229,216,0.55)" }}>{cur.energySignal.confidence} convergence · {Math.round(cur.energySignal.confidenceRatio * 100)}%</div>
+                </div>
+                <div style={{ fontSize: "10px", lineHeight: "1.55", color: "rgba(237,229,216,0.48)" }}>{cur.energySignal.reasons.join(" · ")}</div>
+              </div>
+            )}
             {[
               { label: "Feeling",    icon: "💭", text: cur.insight.feeling },
               { label: "Needs",      icon: "🌱", text: cur.insight.needs },
@@ -3237,6 +3406,7 @@ function App() {
           {profile === "F" && (() => {
             const personal = getHerPersonalEnergy(cur, selected);
             const personalCopyKey = `her-personal-${selected}`;
+            const personalCopyText = `HER PERSONAL ENERGY · ${personal.label}\n\nTODAY'S CORE ENERGY\n${personal.text}\n\nWHAT IS HAPPENING WITHIN\n${personal.inner}\n\nLOVE & RELATIONSHIPS\n${personal.relationship}\n\nWHAT YOU NEED TODAY\n${personal.need}\n\nHOW TO USE THIS ENERGY\n${personal.bestUse}\n\nWHAT TO WATCH FOR\n${personal.watchFor}`;
             return (
               <div style={{ background: `${personal.color}12`, border: `1px solid ${personal.color}45`, borderRadius: "10px", padding: "14px", marginBottom: "10px" }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "10px", marginBottom: "9px" }}>
@@ -3244,11 +3414,25 @@ function App() {
                     <div style={{ fontSize: "8px", letterSpacing: "3px", textTransform: "uppercase", color: `${personal.color}aa`, marginBottom: "3px" }}>Her Personal Energy</div>
                     <div style={{ fontSize: "12px", color: personal.color, fontWeight: "bold" }}>{personal.label}</div>
                   </div>
-                  <button onClick={() => copy(personal.text, personalCopyKey)} style={{ background: "rgba(255,255,255,0.06)", border: `1px solid ${personal.color}35`, color: copied === personalCopyKey ? personal.color : "rgba(237,229,216,0.42)", fontSize: "9px", padding: "4px 8px", borderRadius: "4px", cursor: "pointer" }}>
+                  <button onClick={() => copy(personalCopyText, personalCopyKey)} style={{ background: "rgba(255,255,255,0.06)", border: `1px solid ${personal.color}35`, color: copied === personalCopyKey ? personal.color : "rgba(237,229,216,0.42)", fontSize: "9px", padding: "4px 8px", borderRadius: "4px", cursor: "pointer" }}>
                     {copied === personalCopyKey ? "✓" : "COPY"}
                   </button>
                 </div>
                 <p style={{ fontSize: "14px", lineHeight: "1.82", margin: 0, color: "#f0e8d8" }}>{personal.text}</p>
+                <div style={{ marginTop: "12px" }}>
+                  {[
+                    ["What Is Happening Within", "🪞", personal.inner],
+                    ["Love & Relationships", "💞", personal.relationship],
+                    ["What You Need Today", "🌱", personal.need],
+                    ["How to Use This Energy", "✨", personal.bestUse],
+                    ["What to Watch For", "👁", personal.watchFor],
+                  ].map(([label, icon, text]) => (
+                    <div key={label} style={{ borderTop: `1px solid ${personal.color}25`, paddingTop: "10px", marginTop: "10px" }}>
+                      <div style={{ fontSize: "8px", letterSpacing: "1.5px", textTransform: "uppercase", color: `${personal.color}bb`, marginBottom: "5px" }}>{icon} {label}</div>
+                      <div style={{ fontSize: "12px", lineHeight: "1.72", color: "rgba(237,229,216,0.72)" }}>{text}</div>
+                    </div>
+                  ))}
+                </div>
                 <div style={{ borderTop: `1px solid ${personal.color}25`, marginTop: "11px", paddingTop: "8px", fontSize: "9px", lineHeight: "1.55", color: "rgba(237,229,216,0.35)" }}>
                   Aquarius Sun · Sagittarius Moon · Capricorn Rising · Aquarius Venus · Saturn chart ruler · Born 5:22 a.m.
                 </div>
@@ -3357,14 +3541,14 @@ function App() {
         const vibe = getVibe(dayM, dayF);
         const dailyGuidance = getDailyTogetherGuidance(dayM, dayF, vibe, selected);
         const dating = getDatingInsight(dayM, dayF, vibe);
-        const herDating = getHerDatingInsight(dayM, dayF, vibe);
+        const herDating = getHerDatingInsight(dayM, dayF, vibe, selected);
         const stars = [1,2,3,4,5].map(n => n <= vibe.score ? vibe.color : "rgba(237,229,216,0.12)");
         const copyKey = `together-${selected}`;
         const datingCopyKey = `dating-${selected}`;
         const herDatingCopyKey = `her-dating-${selected}`;
         const togetherText = `${dayM.primary.text}\n\n${dayF.primary.text}\n\n${dailyGuidance}`;
         const datingText = `UNDERSTANDING HIM TODAY\n\nHOW HE MAY BE SHOWING UP\n${dating.showing}\n\nWHAT MAY BE UNDERNEATH IT\n${dating.underneath}\n\nWHAT HE MAY NEED FROM YOU\n${dating.need}\n\nWHAT NOT TO ASSUME\n${dating.notAssume}\n\nHOW TO APPROACH HIM\n${dating.approach}\n\nCONVERSATION OPENER\n“${dating.opener}”\n\nDATING ENERGY TODAY\n${dating.datingEnergy}\n\nYOUR GROUNDING REMINDER\n${dating.grounding}`;
-        const herDatingText = `UNDERSTANDING HER TODAY\n\nHOW SHE MAY BE SHOWING UP\n${herDating.showing}\n\nWHAT MAY BE UNDERNEATH IT\n${herDating.underneath}\n\nWHAT SHE MAY NEED FROM YOU\n${herDating.need}\n\nWHAT NOT TO ASSUME\n${herDating.notAssume}\n\nHOW TO APPROACH HER\n${herDating.approach}\n\nCONVERSATION OPENER\n“${herDating.opener}”\n\nDATING ENERGY TODAY\n${herDating.datingEnergy}\n\nYOUR GROUNDING REMINDER\n${herDating.grounding}`;
+        const herDatingText = `MORE ABOUT HER TODAY\n\nHOW SHE MAY BE SHOWING UP\n${herDating.showing}\n\nWHAT MAY BE UNDERNEATH IT\n${herDating.underneath}\n\nWHAT SHE MAY NEED FROM YOU\n${herDating.need}\n\nWHAT NOT TO ASSUME\n${herDating.notAssume}\n\nHOW TO APPROACH HER\n${herDating.approach}\n\nCONVERSATION OPENER\n“${herDating.opener}”\n\nRELATIONSHIP ENERGY TODAY\n${herDating.datingEnergy}\n\nWHAT THE RELATIONSHIP NEEDS\n${herDating.relationshipNeed}\n\nHOW TO WORK TOGETHER\n${herDating.teamwork}\n\nPOTENTIAL FRICTION + REPAIR\n${herDating.frictionRepair}\n\nSMALL ACT OF CONNECTION\n${herDating.connectionMove}\n\nYOUR GROUNDING REMINDER\n${herDating.grounding}`;
         return (
           <div style={{ padding: "14px 12px 80px" }}>
             {/* Date header */}
@@ -3385,6 +3569,21 @@ function App() {
                 {stars.map((col, i) => <span key={i} style={{ fontSize: "14px", color: col }}>★</span>)}
               </div>
               <p style={{ fontSize: "13px", lineHeight: "1.7", color: "rgba(237,229,216,0.75)", margin: "0 0 12px" }}>{vibe.read}</p>
+              {vibe.relationshipNeed && (
+                <div style={{ textAlign: "left", borderTop: `1px solid ${vibe.color}30`, paddingTop: "4px", marginTop: "12px" }}>
+                  {[
+                    ["What Your Relationship Needs", "🫶", vibe.relationshipNeed],
+                    ["How to Work Together", "🧩", vibe.workTogether],
+                    ["What to Watch For", "👁", vibe.watchFor],
+                    ["If You Need to Repair", "🛠️", vibe.repair],
+                  ].map(([label, icon, text]) => (
+                    <div key={label} style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "10px", marginTop: "10px" }}>
+                      <div style={{ fontSize: "8px", letterSpacing: "1.5px", textTransform: "uppercase", color: `${vibe.color}bb`, marginBottom: "5px" }}>{icon} {label}</div>
+                      <div style={{ fontSize: "12px", lineHeight: "1.68", color: "rgba(237,229,216,0.68)" }}>{text}</div>
+                    </div>
+                  ))}
+                </div>
+              )}
               <div style={{ borderTop: `1px solid ${vibe.color}30`, paddingTop: "12px" }}>
                 <div style={{ fontSize: "8px", letterSpacing: "2px", textTransform: "uppercase", color: `${vibe.color}80`, marginBottom: "6px" }}>Today’s guidance</div>
                 <p style={{ fontSize: "12px", lineHeight: "1.65", color: "rgba(237,229,216,0.6)", margin: 0, fontStyle: "italic" }}>{dailyGuidance}</p>
@@ -3465,7 +3664,7 @@ function App() {
             {/* Dating insight for him about her */}
             <div style={{ background: "rgba(155,126,200,0.08)", border: "1px solid rgba(155,126,200,0.34)", borderRadius: "12px", padding: "14px", marginTop: "14px" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "10px", marginBottom: "12px" }}>
-                <div style={{ fontSize: "9px", letterSpacing: "2px", textTransform: "uppercase", color: "rgba(212,160,192,0.92)" }}>💜 Understanding Her Today</div>
+                <div style={{ fontSize: "9px", letterSpacing: "2px", textTransform: "uppercase", color: "rgba(212,160,192,0.92)" }}>💜 More About Her Today</div>
                 <button onClick={() => copy(herDatingText, herDatingCopyKey)} style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(155,126,200,0.4)", color: copied === herDatingCopyKey ? "#D4A0C0" : "rgba(237,229,216,0.46)", fontSize: "9px", padding: "5px 8px", borderRadius: "4px", cursor: "pointer" }}>{copied === herDatingCopyKey ? "✓ COPIED" : "COPY"}</button>
               </div>
               {[
@@ -3475,7 +3674,11 @@ function App() {
                 ["What Not to Assume", "🕊️", herDating.notAssume],
                 ["How to Approach Her", "🤝", herDating.approach],
                 ["Conversation Opener", "💬", `“${herDating.opener}”`],
-                ["Dating Energy Today", "💞", herDating.datingEnergy],
+                ["Relationship Energy Today", "💞", herDating.datingEnergy],
+                ["What the Relationship Needs", "🫶", herDating.relationshipNeed],
+                ["How to Work Together", "🧩", herDating.teamwork],
+                ["Potential Friction + Repair", "🛠️", herDating.frictionRepair],
+                ["Small Act of Connection", "✨", herDating.connectionMove],
                 ["Your Grounding Reminder", "⚓", herDating.grounding],
               ].map(([label, icon, text]) => (
                 <div key={label} style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "9px", marginTop: "9px" }}>
