@@ -107,11 +107,18 @@ const HEXAGRAMS = [
 
 // ─── FIXED ESOTERIC PROFILE DETAILS ───
 const PROFILE_DETAILS = {
-  M: { name: "Him", born: "January 21, 1984 · Pittsburgh, Pennsylvania · Aquarius",
-    sun: "Aquarius ♒ — visionary, independent, original",
-    moon: "Birth date and Pittsburgh birthplace added — exact birth time is still needed for a fully verified Moon placement", rising: "Pittsburgh birthplace added — exact birth time is still required to calculate",
+  M: { name: "Him", born: "January 21, 1984 · Pittsburgh, Pennsylvania · exact birth time unknown",
+    sun: "Aquarius ♒ — visionary, independent, original, and oriented toward what could be improved",
+    moon: "Not verified — an exact birth time is required before the app should assign his Moon placement", rising: "Not verified — an exact birth time is required to calculate his Ascendant and houses",
+    corePattern: "Aquarius Sun · Life Path 8 · Water Pig — independent vision, strategic authority, quiet loyalty, generosity, and long-term building",
+    strengths: "Systems thinking, originality, resilience, leadership, practical protection, disciplined follow-through, and seeing possibilities before they are obvious",
+    relationshipStyle: "May value loyalty, respect, autonomy, friendship, and practical dependability. Care may appear through consistency or provision, but private loyalty is most secure when it is also expressed through contact, reassurance, planning, vulnerability, and follow-through.",
+    relationshipNeeds: "Respectful directness, room to process, appreciation that is specific, partnership without control, and connection that allows both closeness and independence",
+    growthEdges: "Watch for assuming intentions are visible, using silence instead of an unfinished truth, staying in strategy when vulnerability is needed, or carrying responsibility until rest feels impossible",
+    accuracy: "Verified: date, birthplace, Aquarius Sun, Life Path 8, and Water Pig. Not calculated: Moon, Rising, houses, exact aspects, or Human Design without a birth time.",
     lifePath: "8 — The Powerhouse: ambition, authority, mastery, built to lead and build lasting things", profection: "Calculated from his age for each selected date (his Jan 21 birthday opens each new profection year)",
-    chinese: "Water Pig 🐖 — born before the Feb 2, 1984 Lunar New Year; intuitive, loyal, generous, quietly strong", hd: "Birth date and Pittsburgh birthplace added — exact birth time is still required for Human Design type and authority" },
+    chinese: "Water Pig 🐖 — born before the Feb 2, 1984 Lunar New Year; loyal, generous, perceptive, and quietly strong",
+    hd: "Not calculated — exact birth time is required for Human Design type, authority, profile, channels, and centers" },
   F: { name: "Her", born: "February 11, 1988 · 5:22 a.m. · West Palm Beach, Florida",
     sun: "Aquarius ♒ — visionary, humanitarian, free-thinking",
     moon: "Scorpio ♏ 27°39′ — emotionally perceptive, private, intense, and deeply loyal",
@@ -373,7 +380,7 @@ const M_INSIGHTS_POOL = {
   mystic: [
     { feeling: "Unsettled in a way he cannot fully explain. Eclipse energy moves through the body before the mind catches up. He may feel something is ending without knowing what.", needs: "Validation that what he is feeling is real even without a logical explanation. His intuition is picking up on a genuine shift.", watchFor: "He may try to intellectualize what is happening. Encourage him to feel it instead of explain it." },
     { feeling: "Quiet in a heavier way than usual, like he's listening to something underneath the surface of the day.", needs: "No pressure to perform normal. Let the day move slower than usual if that's what he needs.", watchFor: "He may seem oddly distant from people he's usually close with. That's not pulling away from you — it's pulling inward." },
-    { feeling: "Sensing a shift before there's evidence of one — a change in a relationship, a project, a direction that hasn't announced itself yet.", needs: "Someone who doesn't need him to justify the feeling with facts before taking it seriously.", watchFor: "He may second-guess his own read on something. Eclipse instincts are usually right — encourage him to trust the first read." },
+    { feeling: "Noticing a possible shift before he has enough information to explain it—a change in a relationship, project, or direction that still needs context.", needs: "Someone who can take the impression seriously without demanding immediate certainty or treating it as proven fact.", watchFor: "He may either dismiss the signal too quickly or become overly attached to his first explanation. Observation and direct communication can refine the read." },
     { feeling: "Stirred up in a way that's hard to name. Eclipse windows can surface old patterns or unfinished business out of nowhere.", needs: "Space to sit with discomfort without rushing to resolve it today. Some things need to be felt before they make sense.", watchFor: "Old frustrations may resurface seemingly out of proportion to the moment. It's the eclipse stirring the pot, not the moment itself." },
     { feeling: "Strangely calm in the middle of something that feels significant — like he already knows how this resolves, even if he can't say how.", needs: "To be trusted with his own timeline for processing this. He doesn't need to talk it through immediately.", watchFor: "He may go quiet for longer than usual. Give it room before assuming something's wrong." },
   ],
@@ -725,45 +732,45 @@ const HIM_AFFIRMATIONS = {
     "The work has a way of waiting. You don't have to chase it every single day.",
   ],
   mystic: [
-    "You knew before you had proof. Trust that — your gut has a better record than your logic.",
-    "Not everything needs explaining. Some things you just know. Honor that today.",
+    "You may notice something before you can explain it. Honor the signal, then let facts and direct conversation clarify what it means.",
+    "Not every feeling arrives with an immediate explanation. Give it attention without turning it into certainty too soon.",
     "When the ground shifts, you don't panic. You read it. That's a rare kind of strength.",
-    "The unseen is talking. Get quiet enough to hear it.",
+    "Quiet may help you notice what noise has been covering. Observe carefully before deciding on the meaning.",
     "Change is a doorway, not a threat. Walk through it with your eyes open.",
     "You sense what others miss. Don't talk yourself out of what you already feel.",
     "Endings clear space for what's meant to find you. Let this one breathe.",
     "The threshold is uncomfortable on purpose. You're being prepared, not punished.",
-    "Trust the timing even when you can't see the reason yet.",
+    "Respect the timing even when the reason is not visible yet, while remaining responsive to new information.",
     "What's leaving was supposed to leave. What's coming is worth the quiet.",
-    "You're more intuitive than you let people see. Lean on it today.",
+    "Your first impression may contain useful information. Pair it with observation and an honest question today.",
     "Stillness reveals what noise hides. Find some today.",
     "The eclipse changes the lighting, not the path. Keep walking.",
     "One clear next step is enough for today. Let the rest reveal itself in time.",
     "Some knowing lives in the body, not the mind. Listen there today.",
-    "You sense what's true before there's proof. Trust that read even when you can't explain it yet.",
+    "You may sense a meaningful shift before you have context. Keep the impression open until reality helps define it.",
     "Some knowledge lives in the body before it reaches words. Listen there today.",
     "Endings clear space for things that haven't arrived yet. Let this one happen cleanly.",
-    "You don't need a logical explanation for every feeling. Some things are just true.",
+    "You do not need an immediate explanation for every feeling, but feelings and facts still answer different questions.",
     "Stillness reveals what motion hides. Find a few quiet minutes today.",
     "The threshold feels uncomfortable because something real is shifting. That's not a bad sign.",
-    "Trust the timing even when the reason isn't visible yet. It usually becomes clear later.",
+    "Allow time to reveal more context when the reason is not visible yet, and adjust when new facts arrive.",
     "What's leaving was supposed to leave. Don't chase it back out of habit.",
-    "You read energy in rooms most people walk straight through. Use that gift today.",
+    "You may notice tone, timing, and body language that others overlook. Use that awareness to ask a better question today.",
     "Surrendering to what you can't control isn't weakness — it's wisdom.",
-    "Faith without certainty is still faith. You don't need proof to keep moving forward.",
-    "The unseen is communicating. You just have to slow down enough to hear it.",
-    "You've always known more than you let on. Today, trust that knowing.",
+    "You can move with hope while remaining honest about what is known, unknown, and still being tested.",
+    "Slowing down may reveal subtle information you missed at full speed. Keep interpretation flexible.",
+    "You may understand more than you have expressed. Put the understanding into clear words and invite a response.",
     "Change doesn't need your permission, just your willingness to walk through it.",
-    "Sacred timing rarely matches the timeline you wanted. Trust it anyway.",
+    "Timing rarely matches every expectation. Work with what is real while keeping the longer view.",
     "You don't have to understand something fully to honor that it's real.",
     "The quiet inside you has answers the noise outside never will.",
     "Letting go of control today doesn't mean losing your footing. It means trusting the ground.",
     "Something is completing whether you force it or not. Let it complete gently.",
-    "You sense the shift in a relationship or situation before anyone says a word. Honor that instinct.",
+    "You may notice a shift in a relationship before it is discussed. Honor the observation by asking directly rather than assuming its cause.",
     "The body keeps score even when the mind hasn't caught up. Pay attention to both today.",
     "What feels heavy right now is often just transformation in disguise.",
     "You don't need the whole picture to take the next right step. Take it.",
-    "Trust what moved through you in the quiet moments — that's rarely random.",
+    "Remember what surfaced in the quiet, then decide what deserves observation, conversation, or action.",
     "Some doors close so the right one can finally open. Don't force the old one back.",
   ],
   scholar: [
@@ -2239,7 +2246,7 @@ const VIBE_MATRIX = {
   "mystic+soft_mother":       { score: 5, label: "Both Still", color: "#9B7EC8", icon: "🌙", read: "Both in a tender, threshold energy today. One of the most spiritually aligned pairings in the matrix.", move: "Honor the quiet together. Don't try to fix what's moving through. Just be present to it." },
   "mystic+inner_child":       { score: 3, label: "Heavy + Light", color: "#8DB87A", icon: "🌀", read: "He's processing something heavy; she needs lightness. The mismatch is real but temporary.", move: "She doesn't force the lightness. He doesn't pull her into the depth. Meet somewhere in the middle — a walk, a slow moment." },
   "mystic+wise_crone":        { score: 5, label: "Deep Knowing", color: "#9B7EC8", icon: "🔮", read: "Both may be noticing what sits underneath the surface. Their intuition becomes most useful when it opens an honest conversation.", move: "Share what each of you senses, separate observation from interpretation, and verify the meaning together before acting." },
-  "mystic+cosmic_mentor":     { score: 4, label: "Eclipse + Vision", color: "#7B9CDA", icon: "💫", read: "He's at a threshold; she's seeing the next horizon. She can see where the shift is leading even when he can't.", move: "She holds the vision of who he's becoming. He trusts her read even before he can see it himself." },
+  "mystic+cosmic_mentor":     { score: 4, label: "Eclipse + Vision", color: "#7B9CDA", icon: "💫", read: "He may be at a threshold while she notices possible directions beyond the present moment. Her perspective can offer hope without defining his experience for him.", move: "She shares the possibility as an invitation, not a prediction. He considers what resonates, names what is true for him, and lets observable change guide the next step." },
   "mystic+muse":              { score: 3, label: "Depth vs Surface", color: "#D4A0C0", icon: "🌹", read: "He's underwater; she wants to be seen and delighted. Hard day to fully meet each other.", move: "She gives him space rather than needing his full attention today. He checks in when he surfaces." },
   "mystic+priestess":         { score: 5, label: "Sacred Space", color: "#9B7EC8", icon: "☥", read: "Both in a deeply knowing, spiritually attuned place. The most sacred pairing in the matrix.", move: "No performance today. Honor what's moving through both of you. Stillness together is enough." },
   "scholar+fierce_mother":    { score: 3, label: "Caution Meets Fire", color: "#C07850", icon: "📚", read: "He's reviewing and moving carefully; she's at full combustion. She may push; he may pump the brakes.", move: "She respects that he's not stalling — he's being precise. He acknowledges her urgency is real even if the timing isn't right." },
@@ -2729,6 +2736,54 @@ function getHisPersonalEnergy(day, dayIndex) {
     "You are allowed to receive the same steadiness you give so naturally to others.",
     "A man with real purpose can pause without losing his direction.",
   ];
+  const directInner = [
+    "Internally, your Aquarius mind may be organizing several possibilities at once while your Life Path 8 side decides which one is strong enough to build. Clarity may arrive through prioritizing rather than thinking about everything equally.",
+    "You may feel ready to take command of something that has remained vague. The healthiest authority today includes naming what you know, what you do not know yet, and what you can realistically promise.",
+    "A need for independence may be especially strong, but independence does not require emotional invisibility. A concise update can protect both your freedom and the connection.",
+    "You may be measuring the day by progress and results. Remember that honest communication, rest, and receiving support can also be meaningful forms of progress.",
+  ];
+  const nurtureInner = [
+    "Internally, you may be carrying more thought and responsibility than your outward steadiness reveals. Quiet can help, but it will serve you best when the people who matter understand that you are processing rather than disappearing.",
+    "Your mind may want a complete solution before you speak. Today may ask for an unfinished truth instead: what you feel, what remains unclear, and when you can return with more.",
+    "You may be tired of being the dependable one while still resisting help. Let support reach you without treating it as a challenge to your competence.",
+    "A slower pace may reveal which responsibilities are genuinely yours and which ones you have continued carrying out of habit or expectation.",
+  ];
+  const directRelationship = [
+    "In relationships, visible initiative matters today. Start the conversation, make the plan, express affection, or confirm the next visit so loyalty becomes something the other person can experience.",
+    "You may show care through solutions and practical action. Add one sentence about the feeling underneath so your contribution is received as love rather than only efficiency.",
+    "Respect and autonomy matter to you, but partnership also asks for inclusion. Share the direction before making every decision privately.",
+    "Directness can strengthen intimacy today when it includes warmth. Say what you want from the connection instead of waiting for the other person to infer it.",
+  ];
+  const nurtureRelationship = [
+    "In relationships, ask for processing space without leaving its length or meaning undefined. Reassurance plus a specific reconnection time makes quiet less threatening.",
+    "You may want low-demand connection rather than a large emotional conversation. Quiet company, a brief call, affection, or one honest message can keep the bond warm.",
+    "Internal loyalty is meaningful, but the other person cannot feel what remains entirely private. Let care become visible through contact, vulnerability, planning, and follow-through.",
+    "You do not have to match another person's emotional pace. You do need to communicate what you can offer and return when you say you will.",
+  ];
+  const directNeeds = [
+    "You need a worthy focus, respect for your judgment, and enough autonomy to choose how you meet the goal.",
+    "You need one decision that converts mental energy into clear movement without taking on every available responsibility.",
+    "You need specific recognition for what you contribute and partnership from someone capable of carrying a real share.",
+    "You need direct communication, realistic expectations, and a plan that is strong enough to survive ordinary changes.",
+  ];
+  const nurtureNeeds = [
+    "You need reduced pressure, quiet enough to hear your own thoughts, and connection that does not demand immediate perfection.",
+    "You need rest that is not treated as failure and support that does not make you feel managed or underestimated.",
+    "You need permission to offer an incomplete answer while remaining responsible for returning to the conversation.",
+    "You need warmth, practical relief, and one relationship where your value is not limited to what you provide or solve.",
+  ];
+  const directWatch = [
+    "Watch for turning leadership into unilateral decision-making. Informing someone after the decision is not the same as building it together.",
+    "Watch for assuming that a practical action communicates the full emotional meaning. Name the care directly too.",
+    "Watch for overcommitting because capability makes every request look manageable. Sustainable authority includes limits.",
+    "Watch for treating questions as challenges to your loyalty. Sometimes clarity is how the other person protects connection.",
+  ];
+  const nurtureWatch = [
+    "Watch for letting private processing become unexplained distance. A short update can prevent a long misunderstanding.",
+    "Watch for postponing vulnerability until you have a perfect explanation. Connection can begin with what is true but unfinished.",
+    "Watch for carrying exhaustion quietly and then withdrawing suddenly. Name the limit before your energy makes the decision for you.",
+    "Watch for assuming the bond will maintain itself. Quiet loyalty still needs observable contact, initiative, and follow-through.",
+  ];
   const direct = day.tone === "direct";
   const openers = direct ? directOpeners : nurtureOpeners;
   const actions = direct ? directActions : nurtureActions;
@@ -2736,10 +2791,19 @@ function getHisPersonalEnergy(day, dayIndex) {
   const opener = openers[dayIndex % openers.length];
   const action = actions[Math.floor(dayIndex / openers.length) % actions.length];
   const closer = closers[Math.floor(dayIndex / (openers.length * actions.length)) % closers.length];
+  const innerPool = direct ? directInner : nurtureInner;
+  const relationshipPool = direct ? directRelationship : nurtureRelationship;
+  const needsPool = direct ? directNeeds : nurtureNeeds;
+  const watchPool = direct ? directWatch : nurtureWatch;
   return {
     label: direct ? "⚡ Direct Energy" : "🌙 Nurture Energy",
     color: direct ? "#D4A843" : "#9B7EC8",
     text: `${opener} ${action} ${closer}`,
+    inner: innerPool[(dayIndex + 1) % innerPool.length],
+    relationship: relationshipPool[(dayIndex + 2) % relationshipPool.length],
+    need: needsPool[(dayIndex + 3) % needsPool.length],
+    bestUse: action,
+    watchFor: watchPool[dayIndex % watchPool.length],
   };
 }
 
@@ -2764,7 +2828,7 @@ function insightToSecondPerson(text) {
 
 function getHisShareText(day, personal) {
   const date = `${MONTHS[day.date.getUTCMonth()]} ${day.date.getUTCDate()}, ${day.date.getUTCFullYear()}`;
-  return `${date}\n\n${personal.label}\n${personal.text}\n\n${day.primary.text}\n\n${day.alt.text}\n\nYOU MAY BE FEELING\n${insightToSecondPerson(day.insight.feeling)}\n\nWHAT YOU NEED\n${insightToSecondPerson(day.insight.needs)}\n\nWATCH FOR\n${insightToSecondPerson(day.insight.watchFor)}`;
+  return `${date}\n\nHIS PERSONAL ENERGY · ${personal.label}\n${personal.text}\n\nYOU MAY BE FEELING\n${insightToSecondPerson(day.insight.feeling)}\n\nWHAT YOU NEED\n${insightToSecondPerson(day.insight.needs)}\n\nLOVE & RELATIONSHIPS\n${personal.relationship}\n\nHOW TO USE THIS ENERGY\n${personal.bestUse}\n\nWATCH FOR\n${insightToSecondPerson(day.insight.watchFor)}\n\nDAILY AFFIRMATION\n${day.primary.text}\n\nALTERNATE AFFIRMATION\n${day.alt.text}`;
 }
 
 function herInsightToSecondPerson(text) {
@@ -3154,6 +3218,55 @@ function personalizeHerAffirmation(text, archetype, dayIndex) {
   return `${text} ${pool[dayIndex % pool.length]}`;
 }
 
+function personalizeHisAffirmation(text, archetype, dayIndex) {
+  const lenses = {
+    sovereign: [
+      "Let Life Path 8 leadership include listening, delegation, and responsibility for the impact of your decisions.",
+      "Aquarius independence is strongest when it creates room for capable partnership instead of carrying everything alone.",
+      "Real authority can name a limit, receive support, and remain open to information it did not produce.",
+      "Make respect reciprocal today; the standard you hold should also protect the people building beside you.",
+    ],
+    strategist: [
+      "Let private planning include one visible update so the people who matter do not have to interpret your silence.",
+      "Your Aquarius pattern-recognition is useful, and direct questions will test the plan against information you may not yet have.",
+      "Processing time works best when you name when you will return and keep that agreement.",
+      "Strategy protects the future; honest vulnerability protects the relationship while the plan is still forming.",
+    ],
+    visionary: [
+      "Give the Aquarius vision one realistic action, one honest timeline, and enough flexibility to learn from the result.",
+      "Life Path 8 can build the possibility, but sustainable progress does not require proving everything today.",
+      "Invite someone trustworthy into the vision before independence becomes isolation at the decision point.",
+      "Let originality remain open to evidence; refinement does not make the idea less yours.",
+    ],
+    builder: [
+      "Life Path 8 discipline builds lasting things, and rest is part of keeping the builder intact.",
+      "Let practical care be accompanied by words so the emotional meaning is not hidden inside the task.",
+      "The Water Pig's generosity deserves reciprocity; notice who also carries weight for you.",
+      "A boundary around work can protect both your health and your availability for the people you love.",
+    ],
+    mystic: [
+      "Honor an impression as information, then let facts and honest conversation help determine what it means.",
+      "You can acknowledge a shift without claiming certainty about its cause or another person's intentions.",
+      "Quiet reflection is valuable when it leads back to communication rather than indefinite withdrawal.",
+      "Let the unknown remain open long enough for reality—not fear, hope, or assumption—to add context.",
+    ],
+    scholar: [
+      "Your Aquarius mind can revise without losing authority; changing a conclusion when information changes is strength.",
+      "Review the facts and include the emotional impact so precision does not become distance.",
+      "An unfinished answer can still be honest when you name what remains uncertain and when you will revisit it.",
+      "Mastery includes curiosity about another person's experience, not only confidence in your own analysis.",
+    ],
+    devoted: [
+      "Let Water Pig loyalty become visible through contact, reassurance, vulnerability, planning, and follow-through.",
+      "The people you choose should not have to guess whether your quiet devotion still includes them.",
+      "Receive care as openly as you give it, and let reciprocity reveal the relationships built to last.",
+      "Consistency matters most when it is initiated voluntarily rather than appearing only after someone asks for proof.",
+    ],
+  };
+  const pool = lenses[archetype] || lenses.visionary;
+  return `${text} ${pool[dayIndex % pool.length]}`;
+}
+
 // Expands her limited archetype feeling pool into date-specific emotional
 // language. These are reflective possibilities, not claims about her inner state.
 function expandHerDailyFeeling(base, archetype, lunar, element, dayIndex) {
@@ -3487,7 +3600,12 @@ function buildDays(profile) {
     primaryCount[archKey] = pc + 1;
     const jokeBank = (profile === "G" || profile === "B") ? KID_JOKES : ADULT_JOKES;
     const primaryText = affPool[pc % affPool.length];
-    const primary  = { text: profile === "F" ? personalizeHerAffirmation(primaryText, archKey, i) : primaryText, joke: jokeBank[i % jokeBank.length] };
+    const personalizedPrimary = profile === "F"
+      ? personalizeHerAffirmation(primaryText, archKey, i)
+      : profile === "M"
+        ? personalizeHisAffirmation(primaryText, archKey, i)
+        : primaryText;
+    const primary  = { text: personalizedPrimary, joke: jokeBank[i % jokeBank.length] };
 
     // ── ALT = a deliberately CONTRASTING voice (opposite emotional register) ──
     const VOICE_GROUPS = {
@@ -3506,7 +3624,12 @@ function buildDays(profile) {
     const ac = altCount[altKey] || 0;
     altCount[altKey] = ac + 1;
     const altText = altPool2[ac % altPool2.length];
-    const alt      = { text: profile === "F" ? personalizeHerAffirmation(altText, altKey, i + 1) : altText, joke: jokeBank[(i + 17) % jokeBank.length] };
+    const personalizedAlt = profile === "F"
+      ? personalizeHerAffirmation(altText, altKey, i + 1)
+      : profile === "M"
+        ? personalizeHisAffirmation(altText, altKey, i + 1)
+        : altText;
+    const alt      = { text: personalizedAlt, joke: jokeBank[(i + 17) % jokeBank.length] };
 
     const chakra = CHAKRAS[i % 7];
     const hexagram = HEXAGRAMS[i % 64];
@@ -3720,6 +3843,14 @@ function App() {
                 ["☀️ Sun", D.sun],
                 ["🌙 Moon", D.moon],
                 ["⬆️ Rising", D.rising],
+                ...(profile === "M" ? [
+                  ["🧭 Verified Core Pattern", D.corePattern],
+                  ["⭐ Strengths", D.strengths],
+                  ["💞 Relationship Style", D.relationshipStyle],
+                  ["🌱 Relationship Needs", D.relationshipNeeds],
+                  ["👁 Growth Edges", D.growthEdges],
+                  ["✅ Accuracy Note", D.accuracy],
+                ] : []),
                 ...(profile === "F" ? [
                   ["☿ Mercury", D.mercury],
                   ["♀ Venus", D.venus],
@@ -3870,7 +4001,7 @@ function App() {
           {/* Emotional Insight Panel */}
           <div style={{ background: "rgba(255,255,255,0.03)", border: `1px solid ${cur.archData.color}30`, borderRadius: "10px", padding: "14px", marginBottom: "10px" }}>
             <div style={{ fontSize: "8px", letterSpacing: "3px", textTransform: "uppercase", color: `${cur.archData.color}99`, marginBottom: "12px" }}>
-              {cur.archData.icon} {(profile === "G" || profile === "B") ? "What Your Child May Need Today" : "How They May Be Feeling Today"}
+              {cur.archData.icon} {profile === "M" ? "How He May Be Feeling Today" : profile === "F" ? "How She May Be Feeling Today" : "What Your Child May Need Today"}
             </div>
             {cur.energySignal && (
               <div style={{ background: `${cur.archData.color}0d`, border: `1px solid ${cur.archData.color}22`, borderRadius: "8px", padding: "9px 10px", marginBottom: "11px" }}>
@@ -3899,28 +4030,41 @@ function App() {
           {/* Complete second-person message for copying and sharing with him */}
           {profile === "M" && (() => {
             const personal = getHisPersonalEnergy(cur, selected);
+            const hisFeeling = insightToSecondPerson(cur.insight.feeling);
+            const hisNeed = insightToSecondPerson(cur.insight.needs);
+            const hisWatch = insightToSecondPerson(cur.insight.watchFor);
             const shareCopyKey = `his-share-${selected}`;
             return (
               <div style={{ background: `${personal.color}10`, border: `1px solid ${personal.color}50`, borderRadius: "10px", padding: "14px", marginBottom: "10px" }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "10px", marginBottom: "11px" }}>
-                  <div style={{ fontSize: "9px", letterSpacing: "2px", textTransform: "uppercase", color: personal.color }}>💌 Copy & Share With Him</div>
+                  <div>
+                    <div style={{ fontSize: "8px", letterSpacing: "3px", textTransform: "uppercase", color: `${personal.color}aa`, marginBottom: "3px" }}>His Personal Energy</div>
+                    <div style={{ fontSize: "12px", color: personal.color, fontWeight: "bold" }}>{personal.label}</div>
+                  </div>
                   <button onClick={() => copy(getHisShareText(cur, personal), shareCopyKey)} style={{ background: "rgba(255,255,255,0.07)", border: `1px solid ${personal.color}45`, color: copied === shareCopyKey ? personal.color : "rgba(237,229,216,0.5)", fontSize: "9px", padding: "5px 9px", borderRadius: "4px", cursor: "pointer" }}>
                     {copied === shareCopyKey ? "✓ COPIED" : "COPY ALL"}
                   </button>
                 </div>
                 <p style={{ fontSize: "13px", lineHeight: "1.75", color: "#f0e8d8", margin: "0 0 10px" }}>{personal.text}</p>
+                <div style={{ marginBottom: "12px" }}>
+                  {[
+                    ["You May Be Feeling", "🪞", hisFeeling],
+                    ["What You Need", "🌱", hisNeed],
+                    ["Love & Relationships", "💞", personal.relationship],
+                    ["How to Use This Energy", "✨", personal.bestUse],
+                    ["Watch For", "👁", hisWatch],
+                  ].map(([label, icon, text]) => (
+                    <div key={label} style={{ borderTop: `1px solid ${personal.color}25`, paddingTop: "10px", marginTop: "10px" }}>
+                      <div style={{ fontSize: "8px", letterSpacing: "1.5px", textTransform: "uppercase", color: `${personal.color}bb`, marginBottom: "5px" }}>{icon} {label}</div>
+                      <div style={{ fontSize: "12px", lineHeight: "1.72", color: "rgba(237,229,216,0.72)" }}>{text}</div>
+                    </div>
+                  ))}
+                </div>
                 <p style={{ fontSize: "13px", lineHeight: "1.75", color: "rgba(237,229,216,0.78)", margin: "0 0 10px" }}>{cur.primary.text}</p>
                 <p style={{ fontSize: "13px", lineHeight: "1.75", color: "rgba(221,213,236,0.82)", margin: "0 0 12px" }}>{cur.alt.text}</p>
-                {[
-                  ["You May Be Feeling", insightToSecondPerson(cur.insight.feeling)],
-                  ["What You Need", insightToSecondPerson(cur.insight.needs)],
-                  ["Watch For", insightToSecondPerson(cur.insight.watchFor)],
-                ].map(([label, text]) => (
-                  <div key={label} style={{ borderTop: "1px solid rgba(255,255,255,0.07)", paddingTop: "9px", marginTop: "9px" }}>
-                    <div style={{ fontSize: "8px", letterSpacing: "2px", textTransform: "uppercase", color: `${personal.color}aa`, marginBottom: "4px" }}>{label}</div>
-                    <div style={{ fontSize: "12px", lineHeight: "1.68", color: "rgba(237,229,216,0.7)" }}>{text}</div>
-                  </div>
-                ))}
+                <div style={{ borderTop: `1px solid ${personal.color}25`, marginTop: "11px", paddingTop: "8px", fontSize: "9px", lineHeight: "1.55", color: "rgba(237,229,216,0.35)" }}>
+                  Verified: Aquarius Sun · Life Path 8 · Water Pig · Pittsburgh birthplace · Exact birth time still needed for Moon, Rising, houses, and Human Design
+                </div>
               </div>
             );
           })()}
