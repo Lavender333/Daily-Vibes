@@ -445,6 +445,23 @@ const F_INSIGHTS_POOL = {
   ],
 };
 
+// Fresh date-specific foundations for days that need a more precise reading.
+// Day 49 = July 21, 2026 because Day 0 is June 2, 2026.
+const DAILY_INSIGHT_OVERRIDES = {
+  49: {
+    M: {
+      feeling: "Today he may be mentally revisiting a conversation, commitment, or next step before deciding what deserves action. He may appear quieter or more practical while he separates what he knows from what still needs clarification. The deeper theme is not disconnection—it is determining what he can honestly stand behind and sustain.",
+      needs: "He needs a calm opening to communicate without being rushed into a finished answer. One direct question, a little uninterrupted thinking time, and a clear expectation about when the conversation will continue can help him remain both independent and connected.",
+      watchFor: "Watch for private reflection becoming invisible to the relationship. If he cares but does not communicate, initiate, or follow through, the other person can experience distance rather than loyalty. A brief honest update is more useful than waiting until every thought is perfect.",
+    },
+    F: {
+      feeling: "Today she may be especially observant, selective, and aware of whether words and behavior agree. Her energy may turn inward long enough to decide what genuinely deserves her attention. She may want depth and honesty, but she is not required to carry the entire emotional conversation or produce clarity for both people.",
+      needs: "She needs recognition that feels specific, reciprocal communication, and enough space to hear her own response without being left in ambiguity. Clear affection, an initiated check-in, or dependable follow-through may reach her more deeply than a long explanation with no visible action.",
+      watchFor: "Watch for giving more energy in order to secure recognition or keep the connection moving. Her observation can be valuable without becoming a conclusion about what someone else feels. Let behavior, direct questions, and consistency provide the missing information.",
+    },
+  },
+};
+
 const G_INSIGHTS_POOL = {
   dreamer: [
     { feeling: "Bright and imaginative today. Her Pisces heart is full of stories, ideas, and make-believe. She is in her happy place when she is creating.", needs: "Someone to get excited about what she is dreaming up. Ask her to tell you about it — really listen.", watchFor: "She may drift off into her own world. That is healthy for her — let her have it, then gently bring her back when it is time." },
@@ -3447,7 +3464,7 @@ function buildDays(profile) {
     const insightPool = INSIGHT_POOLS[profile][archKey] || INSIGHT_POOLS[profile][FALLBACK[profile]];
     const ic = insightCount[archKey] || 0;
     insightCount[archKey] = ic + 1;
-    const rawInsight = insightPool[ic % insightPool.length];
+    const rawInsight = DAILY_INSIGHT_OVERRIDES[i]?.[profile] || insightPool[ic % insightPool.length];
     const insight  = profile === "F"
       ? {
           ...rawInsight,
