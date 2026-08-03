@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Add rotating daily motivation
         run: |
           python - <<'PY'
@@ -17,11 +19,11 @@ jobs:
           p = Path('index.html')
           s = p.read_text()
 
-          anchor = '''  const nurtureWatch = [
+          if 'const directMotivation = [' not in s:
+            anchor = '''  const nurtureWatch = [
     "Watch for disappearing into self-sufficiency. Taking space is healthy; making people guess whether you are coming back creates avoidable distance.",'''
-          assert anchor in s, 'motivation anchor not found'
-
-          insert = '''  const directMotivation = [
+            assert anchor in s, 'motivation anchor not found'
+            insert = '''  const directMotivation = [
     "Your ideas matter. Choose one clear move, trust your direction, and begin with confidence.",
     "Your vision has value. Give it structure, take the first visible step, and let momentum build.",
     "Meaningful progress will energize you today. Focus your attention where purpose and possibility meet.",
@@ -42,7 +44,7 @@ jobs:
     "Emotional meaning will guide your effort. Choose the action that supports both your peace and your long-term vision.",
   ];
 '''
-          s = s.replace(anchor, insert + anchor, 1)
+            s = s.replace(anchor, insert + anchor, 1)
 
           old = '''  const innerPool = direct ? directInner : nurtureInner;
   const relationshipPool = direct ? directRelationship : nurtureRelationship;
@@ -53,8 +55,9 @@ jobs:
   const needsPool = direct ? directNeeds : nurtureNeeds;
   const watchPool = direct ? directWatch : nurtureWatch;
   const motivationPool = direct ? directMotivation : nurtureMotivation;'''
-          assert old in s, 'pool anchor not found'
-          s = s.replace(old, new, 1)
+          if 'const motivationPool = direct ? directMotivation : nurtureMotivation;' not in s:
+            assert old in s, 'pool anchor not found'
+            s = s.replace(old, new, 1)
 
           old = '''    text: `${opener} ${action} ${closer}`,
     inner,
@@ -69,8 +72,9 @@ jobs:
     need,
     bestUse: action,
     watchFor,'''
-          assert old in s, 'return anchor not found'
-          s = s.replace(old, new, 1)
+          if 'motivation: motivationPool[(dayIndex + 2) % motivationPool.length]' not in s:
+            assert old in s, 'return anchor not found'
+            s = s.replace(old, new, 1)
 
           fixed = '            const dailyMotivation = "Your ideas matter. Your effort has purpose. You are capable of creating a meaningful result. Choose one clear move, trust your direction, and begin with confidence.";\n'
           s = s.replace(fixed, '')
@@ -101,4 +105,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html .github/workflows/make-daily-motivation-dynamic.yml
           git commit -m "Make daily motivation change each day"
-          git push
+          git pull --rebase origin main
+          git push origin HEAD:main
