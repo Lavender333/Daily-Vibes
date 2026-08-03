@@ -1,0 +1,104 @@
+name: Make daily motivation dynamic
+on:
+  push:
+    paths:
+      - '.github/workflows/make-daily-motivation-dynamic.yml'
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add rotating daily motivation
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text()
+
+          anchor = '''  const nurtureWatch = [
+    "Watch for disappearing into self-sufficiency. Taking space is healthy; making people guess whether you are coming back creates avoidable distance.",'''
+          assert anchor in s, 'motivation anchor not found'
+
+          insert = '''  const directMotivation = [
+    "Your ideas matter. Choose one clear move, trust your direction, and begin with confidence.",
+    "Your vision has value. Give it structure, take the first visible step, and let momentum build.",
+    "Meaningful progress will energize you today. Focus your attention where purpose and possibility meet.",
+    "Recognition strengthens your momentum today. Let accurate appreciation remind you of what you are ready to create.",
+    "A clear result will motivate you. Choose the goal that feels alive, specific, and worthy of your energy.",
+    "Your originality is an advantage today. Lead with the idea that feels most true and give it practical form.",
+    "Forward movement will restore your confidence. Complete one action that proves your vision is already becoming real.",
+    "Your voice carries influence today. Say the important thing clearly and move with steady conviction.",
+  ];
+  const nurtureMotivation = [
+    "Your energy returns through clarity, recognition, and one meaningful priority. Let a calm beginning create steady progress.",
+    "A supportive environment will motivate you today. Choose the space, people, and pace that help your best thinking emerge.",
+    "Purpose will gently pull you forward. Begin with the task that feels emotionally meaningful and realistically achievable.",
+    "Your inner clarity is building. Give yourself quiet, then follow the first grounded direction that feels clean and steady.",
+    "Being accurately seen will renew your energy today. Receive encouragement and let it strengthen your next step.",
+    "A simple plan will create momentum. Choose one priority, give it your full attention, and honor the progress you make.",
+    "Restored energy creates your strongest motivation today. Nourish yourself, reconnect with your purpose, and move when your focus returns.",
+    "Emotional meaning will guide your effort. Choose the action that supports both your peace and your long-term vision.",
+  ];
+'''
+          s = s.replace(anchor, insert + anchor, 1)
+
+          old = '''  const innerPool = direct ? directInner : nurtureInner;
+  const relationshipPool = direct ? directRelationship : nurtureRelationship;
+  const needsPool = direct ? directNeeds : nurtureNeeds;
+  const watchPool = direct ? directWatch : nurtureWatch;'''
+          new = '''  const innerPool = direct ? directInner : nurtureInner;
+  const relationshipPool = direct ? directRelationship : nurtureRelationship;
+  const needsPool = direct ? directNeeds : nurtureNeeds;
+  const watchPool = direct ? directWatch : nurtureWatch;
+  const motivationPool = direct ? directMotivation : nurtureMotivation;'''
+          assert old in s, 'pool anchor not found'
+          s = s.replace(old, new, 1)
+
+          old = '''    text: `${opener} ${action} ${closer}`,
+    inner,
+    relationship,
+    need,
+    bestUse: action,
+    watchFor,'''
+          new = '''    text: `${opener} ${action} ${closer}`,
+    motivation: motivationPool[(dayIndex + 2) % motivationPool.length],
+    inner,
+    relationship,
+    need,
+    bestUse: action,
+    watchFor,'''
+          assert old in s, 'return anchor not found'
+          s = s.replace(old, new, 1)
+
+          fixed = '            const dailyMotivation = "Your ideas matter. Your effort has purpose. You are capable of creating a meaningful result. Choose one clear move, trust your direction, and begin with confidence.";\n'
+          s = s.replace(fixed, '')
+          s = s.replace('${dailyMotivation}', '${personal.motivation}')
+          s = s.replace('["What Will Motivate You Today", "🔥", dailyMotivation]', '["What Will Motivate You Today", "🔥", personal.motivation]')
+
+          if 'WHAT WILL MOTIVATE YOU TODAY\\n${personal.motivation}' not in s:
+            old = '''            const personalCopyText = `HER PERSONAL ENERGY · ${personal.label}\\n\\nTODAY'S CORE ENERGY\\n${personal.text}\\n\\nWHAT IS HAPPENING WITHIN\\n${personal.inner}'''
+            new = '''            const personalCopyText = `HER PERSONAL ENERGY · ${personal.label}\\n\\nTODAY'S CORE ENERGY\\n${personal.text}\\n\\nWHAT WILL MOTIVATE YOU TODAY\\n${personal.motivation}\\n\\nWHAT IS HAPPENING WITHIN\\n${personal.inner}'''
+            assert old in s, 'copy insertion anchor not found'
+            s = s.replace(old, new, 1)
+
+          if '["What Will Motivate You Today", "🔥", personal.motivation]' not in s:
+            old = '''                  {[
+                    ["What Is Happening Within", "🪞", personal.inner],'''
+            new = '''                  {[
+                    ["What Will Motivate You Today", "🔥", personal.motivation],
+                    ["What Is Happening Within", "🪞", personal.inner],'''
+            assert old in s, 'panel insertion anchor not found'
+            s = s.replace(old, new, 1)
+
+          p.write_text(s)
+          PY
+      - name: Commit update and remove workflow
+        run: |
+          rm .github/workflows/make-daily-motivation-dynamic.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html .github/workflows/make-daily-motivation-dynamic.yml
+          git commit -m "Make daily motivation change each day"
+          git push
