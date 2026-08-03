@@ -12,71 +12,53 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Replace source-heavy core energy copy
+      - name: Simplify daily focus copy
         run: |
           python - <<'PY'
           from pathlib import Path
+          import re
+
           p = Path('index.html')
           s = p.read_text()
 
-          if 'const directCoreEnergy = [' not in s:
-            anchor = '  const directMotivation = [' if '  const directMotivation = [' in s else '  const directInner = ['
-            assert anchor in s, 'core-energy insertion anchor not found'
-            insert = '''  const directCoreEnergy = [
-    "Today supports decisive movement. Choose the priority that matters most and give it a clear first step.",
-    "Your energy is strongest when it has direction. Focus on one meaningful result and move toward it with confidence.",
-    "Clarity can become momentum today. Name what matters, organize the next move, and let progress build naturally.",
-    "This is a day for visible progress. Put your attention on the action that creates the clearest result.",
-    "Your voice and judgment are available to you today. Lead with what feels true, useful, and ready to be expressed.",
-    "Purpose creates energy today. Choose work that feels meaningful and give it practical form.",
-    "A confident beginning can shape the rest of your day. Start with the task that makes everything else feel lighter.",
-    "Today favors focused action. Let one well-chosen move carry more weight than scattered effort.",
-  ];
-  const nurtureCoreEnergy = [
-    "Today supports a calmer pace and clearer priorities. Give your energy to what feels meaningful, steady, and manageable.",
-    "Your best direction may become clearer through quiet attention. Begin gently and let the right priority come forward.",
-    "This is a day for restoring focus. Create enough space to hear yourself, then move with steady intention.",
-    "Emotional clarity can guide practical progress today. Choose the action that supports both peace and momentum.",
-    "Your energy benefits from simplicity today. Center one priority and let a supportive rhythm carry you forward.",
-    "A grounded beginning will strengthen the rest of your day. Choose steadiness, meaningful effort, and room to breathe.",
-    "Today supports reflection that leads somewhere useful. Gather your thoughts, choose your direction, and move when it feels clear.",
-    "Your strongest progress may come from alignment rather than speed. Focus on what feels true, sustainable, and worth your energy.",
-  ];
-'''
-            s = s.replace(anchor, insert + anchor, 1)
+          direct = [
+            "Today supports decisive movement. Choose the priority that matters most and give it a clear first step.",
+            "Your energy is strongest when it has direction. Focus on one meaningful result and move toward it with confidence.",
+            "Clarity can become momentum today. Name what matters, organize the next move, and let progress build naturally.",
+            "This is a day for visible progress. Put your attention on the action that creates the clearest result.",
+            "Your voice and judgment are available to you today. Lead with what feels true, useful, and ready to be expressed.",
+            "Purpose creates energy today. Choose work that feels meaningful and give it practical form.",
+            "A confident beginning can shape the rest of your day. Start with the task that makes everything else feel lighter.",
+            "Today favors focused action. Let one well-chosen move carry more weight than scattered effort."
+          ]
+          nurture = [
+            "Today supports a calmer pace and clearer priorities. Give your energy to what feels meaningful, steady, and manageable.",
+            "Your best direction may become clearer through quiet attention. Begin gently and let the right priority come forward.",
+            "This is a day for restoring focus. Create enough space to hear yourself, then move with steady intention.",
+            "Emotional clarity can guide practical progress today. Choose the action that supports both peace and momentum.",
+            "Your energy benefits from simplicity today. Center one priority and let a supportive rhythm carry you forward.",
+            "A grounded beginning will strengthen the rest of your day. Choose steadiness, meaningful effort, and room to breathe.",
+            "Today supports reflection that leads somewhere useful. Gather your thoughts, choose your direction, and move when it feels clear.",
+            "Your strongest progress may come from alignment rather than speed. Focus on what feels true, sustainable, and worth your energy."
+          ]
 
-          if 'const coreEnergyPool = direct ? directCoreEnergy : nurtureCoreEnergy;' not in s:
-            pool_anchor = '  const motivationPool = direct ? directMotivation : nurtureMotivation;'
-            if pool_anchor in s:
-              s = s.replace(pool_anchor, pool_anchor + '\n  const coreEnergyPool = direct ? directCoreEnergy : nurtureCoreEnergy;', 1)
-            else:
-              watch_anchor = '  const watchPool = direct ? directWatch : nurtureWatch;'
-              assert watch_anchor in s, 'pool anchor not found'
-              s = s.replace(watch_anchor, watch_anchor + '\n  const coreEnergyPool = direct ? directCoreEnergy : nurtureCoreEnergy;', 1)
-
-          old = '    text: `${opener} ${action} ${closer}`,'
-          new = '    text: coreEnergyPool[dayIndex % coreEnergyPool.length],'
-          if old in s:
-            s = s.replace(old, new, 1)
-
+          inline = "    text: (direct ? " + repr(direct).replace("'", '"') + " : " + repr(nurture).replace("'", '"') + ")[dayIndex % 8],"
+          s, _ = re.subn(r'    text: `\$\{opener\} \$\{action\} \$\{closer\}`,', inline, s, count=1)
           s = s.replace("TODAY'S CORE ENERGY", "TODAY'S FOCUS")
           s = s.replace("Today's Core Energy", "Today's Focus")
           s = s.replace('Her Personal Energy', 'Your Personal Energy')
           s = s.replace('HER PERSONAL ENERGY', 'YOUR PERSONAL ENERGY')
-
-          assert 'text: coreEnergyPool[dayIndex % coreEnergyPool.length]' in s, 'core energy output was not updated'
-          assert "TODAY'S FOCUS" in s, 'section label was not updated'
           p.write_text(s)
           PY
-      - name: Commit update and remove workflow
+      - name: Commit app update
         run: |
-          rm .github/workflows/simplify-todays-core-energy.yml
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html .github/workflows/simplify-todays-core-energy.yml
+          git add index.html
+          if git diff --cached --quiet; then
+            echo "No app changes needed"
+            exit 0
+          fi
           git commit -m "Simplify today's focus for You profile"
-          for attempt in 1 2 3; do
-            git pull --rebase origin main && git push origin HEAD:main && exit 0
-            sleep 5
-          done
-          exit 1
+          git pull --rebase origin main
+          git push origin HEAD:main
