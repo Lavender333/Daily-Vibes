@@ -131,7 +131,7 @@ const PROFILE_DETAILS = {
     direction: "North Node Pisces 23°32′ · Midheaven Scorpio 8°32′ — growth through compassion, intuition, depth, and transformation",
     chartPattern: "Sun conjunct Mercury · Sun square Moon · Saturn conjunct Uranus · Venus square Saturn/Uranus/Neptune · Pluto conjunct Midheaven",
     lifePath: "3 — The Communicator: creative, expressive, the gift of words",
-    profection: "3rd House year — communication, ideas, voice (shifts to 4th House: home & family on her Feb 11 birthday)",
+    profection: "3rd House year — communication, ideas, voice (shifts to 4th House: home & family on your Feb 11 birthday)",
     chinese: "Earth Dragon 🐉 — powerful, magnetic, ambitious",
     hd: "Projector · Splenic Authority · 4/6 Opportunist/Role Model · Split Definition · channels 43–23 and 44–26",
     hdGuidance: "Wait for recognition and the right invitation for major commitments. Trust the first quiet bodily signal, protect non-Sacral energy with rest, and verify emotional interpretations before acting." },
@@ -4172,7 +4172,7 @@ function App() {
             );
           })()}
 
-          {/* Her personal chart-specific Direct/Nurture companion */}
+          {/* Your personal chart-specific Direct/Nurture companion */}
           {profile === "F" && (() => {
             const personal = getHerPersonalEnergy(cur, selected);
             const personalCopyKey = `her-personal-${selected}`;
@@ -4210,7 +4210,7 @@ function App() {
             );
           })()}
 
-          {/* Additional daily depth for her — kept separate from copy/share content */}
+          {/* Additional daily depth for you — kept separate from copy/share content */}
           {profile === "F" && (() => {
             const reading = getHerDeeperReading(cur, selected);
             const sections = [
@@ -4221,7 +4221,7 @@ function App() {
             ];
             return (
               <div style={{ background: "rgba(155,126,200,0.07)", border: "1px solid rgba(155,126,200,0.32)", borderRadius: "10px", padding: "14px", marginBottom: "10px" }}>
-                <div style={{ fontSize: "9px", letterSpacing: "3px", textTransform: "uppercase", color: "rgba(212,160,192,0.85)", marginBottom: "12px" }}>🔮 Deeper Reading for Her</div>
+                <div style={{ fontSize: "9px", letterSpacing: "3px", textTransform: "uppercase", color: "rgba(212,160,192,0.85)", marginBottom: "12px" }}>🔮 Your Deeper Reading</div>
                 {sections.map(([label, icon, text]) => (
                   <div key={label} style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "10px", marginTop: "10px" }}>
                     <div style={{ fontSize: "9px", letterSpacing: "1.5px", textTransform: "uppercase", color: "rgba(212,160,192,0.72)", marginBottom: "5px" }}>{icon} {label}</div>
