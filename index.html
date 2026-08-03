@@ -2686,7 +2686,7 @@ function getHerPersonalEnergy(day, dayIndex) {
   return {
     label: direct ? "⚡ Direct Energy" : "🌙 Nurture Energy",
     color: direct ? "#C9A96E" : "#9B7EC8",
-    text: `${opener} ${action} ${closer}`,
+    text: (direct ? ["Today supports decisive movement. Choose the priority that matters most and give it a clear first step.", "Your energy is strongest when it has direction. Focus on one meaningful result and move toward it with confidence.", "Clarity can become momentum today. Name what matters, organize the next move, and let progress build naturally.", "This is a day for visible progress. Put your attention on the action that creates the clearest result.", "Your voice and judgment are available to you today. Lead with what feels true, useful, and ready to be expressed.", "Purpose creates energy today. Choose work that feels meaningful and give it practical form.", "A confident beginning can shape the rest of your day. Start with the task that makes everything else feel lighter.", "Today favors focused action. Let one well-chosen move carry more weight than scattered effort."] : ["Today supports a calmer pace and clearer priorities. Give your energy to what feels meaningful, steady, and manageable.", "Your best direction may become clearer through quiet attention. Begin gently and let the right priority come forward.", "This is a day for restoring focus. Create enough space to hear yourself, then move with steady intention.", "Emotional clarity can guide practical progress today. Choose the action that supports both peace and momentum.", "Your energy benefits from simplicity today. Center one priority and let a supportive rhythm carry you forward.", "A grounded beginning will strengthen the rest of your day. Choose steadiness, meaningful effort, and room to breathe.", "Today supports reflection that leads somewhere useful. Gather your thoughts, choose your direction, and move when it feels clear.", "Your strongest progress may come from alignment rather than speed. Focus on what feels true, sustainable, and worth your energy."])[dayIndex % 8],
     inner,
     relationship,
     need,
@@ -4176,12 +4176,12 @@ function App() {
           {profile === "F" && (() => {
             const personal = getHerPersonalEnergy(cur, selected);
             const personalCopyKey = `her-personal-${selected}`;
-            const personalCopyText = `HER PERSONAL ENERGY · ${personal.label}\n\nTODAY'S CORE ENERGY\n${personal.text}\n\nWHAT IS HAPPENING WITHIN\n${personal.inner}\n\nLOVE & RELATIONSHIPS\n${personal.relationship}\n\nWHAT YOU NEED TODAY\n${personal.need}\n\nHOW TO USE THIS ENERGY\n${personal.bestUse}\n\nWHAT TO WATCH FOR\n${personal.watchFor}`;
+            const personalCopyText = `YOUR PERSONAL ENERGY · ${personal.label}\n\nTODAY'S FOCUS\n${personal.text}\n\nWHAT IS HAPPENING WITHIN\n${personal.inner}\n\nLOVE & RELATIONSHIPS\n${personal.relationship}\n\nWHAT YOU NEED TODAY\n${personal.need}\n\nHOW TO USE THIS ENERGY\n${personal.bestUse}\n\nWHAT TO WATCH FOR\n${personal.watchFor}`;
             return (
               <div style={{ background: `${personal.color}12`, border: `1px solid ${personal.color}45`, borderRadius: "10px", padding: "14px", marginBottom: "10px" }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "10px", marginBottom: "9px" }}>
                   <div>
-                    <div style={{ fontSize: "8px", letterSpacing: "3px", textTransform: "uppercase", color: `${personal.color}aa`, marginBottom: "3px" }}>Her Personal Energy</div>
+                    <div style={{ fontSize: "8px", letterSpacing: "3px", textTransform: "uppercase", color: `${personal.color}aa`, marginBottom: "3px" }}>Your Personal Energy</div>
                     <div style={{ fontSize: "12px", color: personal.color, fontWeight: "bold" }}>{personal.label}</div>
                   </div>
                   <button onClick={() => copy(personalCopyText, personalCopyKey)} style={{ background: "rgba(255,255,255,0.06)", border: `1px solid ${personal.color}35`, color: copied === personalCopyKey ? personal.color : "rgba(237,229,216,0.42)", fontSize: "9px", padding: "4px 8px", borderRadius: "4px", cursor: "pointer" }}>
