@@ -1,0 +1,43 @@
+name: Add daily motivation
+on:
+  push:
+    paths:
+      - '.github/workflows/add-daily-motivation.yml'
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update daily motivation section
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text()
+
+          old = '''            const personalCopyText = `HER PERSONAL ENERGY · ${personal.label}\\n\\nTODAY'S CORE ENERGY\\n${personal.text}\\n\\nWHAT IS HAPPENING WITHIN\\n${personal.inner}\\n\\nLOVE & RELATIONSHIPS\\n${personal.relationship}\\n\\nWHAT YOU NEED TODAY\\n${personal.need}\\n\\nHOW TO USE THIS ENERGY\\n${personal.bestUse}\\n\\nWHAT TO WATCH FOR\\n${personal.watchFor}`;'''
+          new = '''            const dailyMotivation = "Your ideas matter. Your effort has purpose. You are capable of creating a meaningful result. Choose one clear move, trust your direction, and begin with confidence.";
+            const personalCopyText = `HER PERSONAL ENERGY · ${personal.label}\\n\\nTODAY'S CORE ENERGY\\n${personal.text}\\n\\nWHAT WILL MOTIVATE YOU TODAY\\n${dailyMotivation}\\n\\nWHAT IS HAPPENING WITHIN\\n${personal.inner}\\n\\nLOVE & RELATIONSHIPS\\n${personal.relationship}\\n\\nWHAT YOU NEED TODAY\\n${personal.need}\\n\\nHOW TO USE THIS ENERGY\\n${personal.bestUse}\\n\\nWHAT TO WATCH FOR\\n${personal.watchFor}`;'''
+          assert old in s, 'copy-text anchor not found'
+          s = s.replace(old, new, 1)
+
+          old2 = '''                  {[
+                    ["What Is Happening Within", "🪞", personal.inner],'''
+          new2 = '''                  {[
+                    ["What Will Motivate You Today", "🔥", dailyMotivation],
+                    ["What Is Happening Within", "🪞", personal.inner],'''
+          assert old2 in s, 'panel anchor not found'
+          s = s.replace(old2, new2, 1)
+
+          p.write_text(s)
+          PY
+      - name: Commit update and remove workflow
+        run: |
+          rm .github/workflows/add-daily-motivation.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html .github/workflows/add-daily-motivation.yml
+          git commit -m "Add daily motivation to You profile"
+          git push
