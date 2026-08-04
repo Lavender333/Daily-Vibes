@@ -4116,9 +4116,9 @@ function App() {
               </div>
             )}
             {[
-              { label: "Feeling",    icon: "💭", text: cur.insight.feeling },
-              { label: "May Benefit From", icon: "🌱", text: softenNeedLanguage(cur.insight.needs) },
-              { label: "Watch For",  icon: "👁",  text: cur.insight.watchFor },
+              { label: profile === "F" ? "What You May Be Feeling" : "Feeling", icon: "💭", text: profile === "F" ? insightToSecondPerson(cur.insight.feeling) : cur.insight.feeling },
+              { label: profile === "F" ? "What Will Support You Today" : "May Benefit From", icon: "🌱", text: profile === "F" ? softenNeedLanguage(insightToSecondPerson(cur.insight.needs)) : softenNeedLanguage(cur.insight.needs) },
+              { label: profile === "F" ? "Be Mindful Of" : "Watch For", icon: "👁", text: profile === "F" ? insightToSecondPerson(cur.insight.watchFor) : cur.insight.watchFor },
             ].map(({ label, icon, text }) => (
               <div key={label} style={{ marginBottom: "10px" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: "5px", marginBottom: "3px" }}>
