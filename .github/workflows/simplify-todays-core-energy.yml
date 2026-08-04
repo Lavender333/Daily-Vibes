@@ -37,7 +37,6 @@ jobs:
               s = s.replace(old, new, 1)
               changed = True
 
-          # Ensure visible profile labels stay in second person.
           s = s.replace('Her Personal Energy', 'Your Personal Energy')
           s = s.replace('HER PERSONAL ENERGY', 'YOUR PERSONAL ENERGY')
           s = s.replace('Deeper Reading for Her', 'Your Deeper Reading')
@@ -57,3 +56,4 @@ jobs:
           git commit -m "Use second-person insight labels for You profile"
           git pull --rebase origin main
           git push origin HEAD:main
+# triggered 2026-08-03 22:22 ET
