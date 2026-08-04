@@ -1,4 +1,4 @@
-name: Update You profile wording
+name: Update You profile insight wording
 on:
   push:
     paths:
@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Replace remaining Her labels
+      - name: Update insight labels and second-person copy
         run: |
           python - <<'PY'
           from pathlib import Path
@@ -21,19 +21,29 @@ jobs:
           s = p.read_text()
 
           replacements = {
-            'Her Personal Energy': 'Your Personal Energy',
-            'HER PERSONAL ENERGY': 'YOUR PERSONAL ENERGY',
-            'Deeper Reading for Her': 'Your Deeper Reading',
-            'DEEPER READING FOR HER': 'YOUR DEEPER READING',
-            'on her Feb 11 birthday': 'on your Feb 11 birthday',
-            'for her — kept separate': 'for you — kept separate',
-            'Her personal chart-specific': 'Your personal chart-specific',
+            '{ label: "Feeling",    icon: "💭", text: cur.insight.feeling },':
+            '{ label: profile === "F" ? "What You May Be Feeling" : "Feeling", icon: "💭", text: profile === "F" ? insightToSecondPerson(cur.insight.feeling) : cur.insight.feeling },',
+
+            '{ label: "May Benefit From", icon: "🌱", text: softenNeedLanguage(cur.insight.needs) },':
+            '{ label: profile === "F" ? "What Will Support You Today" : "May Benefit From", icon: "🌱", text: profile === "F" ? softenNeedLanguage(insightToSecondPerson(cur.insight.needs)) : softenNeedLanguage(cur.insight.needs) },',
+
+            '{ label: "Watch For",  icon: "👁",  text: cur.insight.watchFor },':
+            '{ label: profile === "F" ? "Be Mindful Of" : "Watch For", icon: "👁", text: profile === "F" ? insightToSecondPerson(cur.insight.watchFor) : cur.insight.watchFor },',
           }
 
+          changed = False
           for old, new in replacements.items():
-            s = s.replace(old, new)
+            if old in s:
+              s = s.replace(old, new, 1)
+              changed = True
+
+          # Ensure visible profile labels stay in second person.
+          s = s.replace('Her Personal Energy', 'Your Personal Energy')
+          s = s.replace('HER PERSONAL ENERGY', 'YOUR PERSONAL ENERGY')
+          s = s.replace('Deeper Reading for Her', 'Your Deeper Reading')
 
           p.write_text(s)
+          print('updated' if changed else 'already updated')
           PY
       - name: Commit app update
         run: |
@@ -44,6 +54,6 @@ jobs:
             echo "No app changes needed"
             exit 0
           fi
-          git commit -m "Use You wording throughout profile"
+          git commit -m "Use second-person insight labels for You profile"
           git pull --rebase origin main
           git push origin HEAD:main
